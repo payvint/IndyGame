@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="380sp"
+    android:layout_height="380sp"
 
     tools:context=".MainActivity"
-    android:clickable="true">
+    android:clickable="true"
+    android:minHeight="100sp"
+    android:minWidth="100sp"
+    android:padding="0sp"
+    android:layout_gravity="center_vertical|center_horizontal">
+
 
     <Button
         android:layout_width="match_parent"
@@ -17,16 +22,31 @@
         android:textSize="20sp" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/fon"
-        android:src="@drawable/fon" />
+        android:src="@drawable/fon"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ramka"
-        android:src="@drawable/ramka" />
+        android:src="@drawable/ramka"
+        android:layout_alignBaseline="@+id/k_r"
+        android:padding="0sp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/k_u"
+        android:src="@drawable/kkkk"
+        android:minWidth="80sp"
+        android:minHeight="20sp"
+        android:maxWidth="80sp"
+        android:maxHeight="20sp"
+        android:rotation="180"
+        android:layout_marginTop="5sp"
+        android:layout_gravity="center_horizontal|top"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -42,7 +62,8 @@
         android:cropToPadding="true"
         android:contextClickable="false"
         android:layout_gravity="center_vertical|right"
-        android:layout_marginRight="5sp" />
+        android:layout_marginRight="5sp"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,37 +80,17 @@
         android:layout_gravity="center_vertical|left"
         android:layout_marginLeft="5sp"
         android:rotation="180"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/k_u"
-        android:src="@drawable/kkk"
-        android:visibility="visible"
-        android:scaleType="center"
-        android:minWidth="20sp"
-        android:minHeight="80sp"
-        android:maxWidth="20sp"
-        android:maxHeight="80sp"
-        android:cropToPadding="true"
-        android:contextClickable="false"
-        android:layout_gravity="center_horizontal|top"
-        android:rotation="-90"
-        android:layout_marginTop="37sp" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/k_d"
-        android:src="@drawable/kkk"
-        android:visibility="visible"
-        android:scaleType="center"
-        android:minWidth="20sp"
-        android:minHeight="80sp"
-        android:maxWidth="20sp"
-        android:maxHeight="80sp"
-        android:cropToPadding="true"
-        android:contextClickable="false"
-        android:layout_gravity="center_horizontal|bottom"
-        android:rotation="90"
-        android:layout_marginBottom="37sp" />
+        android:src="@drawable/kkkk"
+        android:minWidth="80sp"
+        android:minHeight="20sp"
+        android:maxWidth="80sp"
+        android:maxHeight="20sp"
+        android:layout_marginBottom="5sp"
+        android:layout_gravity="center_horizontal|bottom"/>
 
 </FrameLayout>
