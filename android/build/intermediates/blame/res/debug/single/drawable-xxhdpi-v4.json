@@ -1,10 +1,6 @@
 [
     {
-        "merged": "/home/artem/IG/android/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
-        "source": "/home/artem/IG/android/res/drawable-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/artem/IndyGame/android/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
-        "source": "/home/artem/IndyGame/android/res/drawable-xxhdpi/ic_launcher.png"
+        "merged": "/home/pinkpony008/IndyGame/android/build/intermediates/res/merged/debug/drawable-xxhdpi-v4/ic_launcher.png",
+        "source": "/home/pinkpony008/IndyGame/android/res/drawable-xxhdpi/ic_launcher.png"
     }
 ]
