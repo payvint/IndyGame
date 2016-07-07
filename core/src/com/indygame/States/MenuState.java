@@ -14,6 +14,7 @@ public class MenuState extends State {
     public MenuState(GameStateManager gsm) {
         super(gsm);
         background = new Texture("bCol.png");
+        camera.setToOrtho(false, Indygame.width, Indygame.height);
     }
 
     @Override
@@ -23,11 +24,12 @@ public class MenuState extends State {
 
     @Override
     public void update(float dt) {
-
+        camera.update();
     }
 
     @Override
     public void render(SpriteBatch sb) {
+        sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
         sb.end();

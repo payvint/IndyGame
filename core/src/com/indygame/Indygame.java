@@ -40,8 +40,8 @@ public class Indygame extends ApplicationAdapter {
 		//TouchPosition
 		//touchPos = new Vector3();
 		//Cam
-		mainCamera = new OrthographicCamera();
-		mainCamera.setToOrtho(false, width, height);
+		//mainCamera = new OrthographicCamera();
+		//mainCamera.setToOrtho(false, width, height);
 		//Picture
 		//bColor = new Texture("bCol");
 		batch = new SpriteBatch();

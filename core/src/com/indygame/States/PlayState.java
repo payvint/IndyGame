@@ -26,6 +26,7 @@ public class PlayState extends State {
     public PlayState(GameStateManager gsm) {
         super(gsm);
         point = new Point(Indygame.width / 2 - 50, Indygame.height / 2 - 50, MathUtils.random(360));
+        camera.setToOrtho(false, Indygame.width, Indygame.height);
         background = new Texture("bCol.png");
         platformHorizontalDown = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMin, new Texture("platformHD.png"));
         platformHorizontalUp = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMax, new Texture("platformHU.png"));
@@ -51,10 +52,12 @@ public class PlayState extends State {
             handleInput();
         }
         point.update(dt);
+        camera.update();
     }
 
     @Override
     public void render(SpriteBatch sb) {
+        sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
         sb.draw(platformHorizontalDown.getPlatform(), platformHorizontalDown.getPosition().x, platformHorizontalDown.getPosition().y);
