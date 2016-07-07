@@ -13,13 +13,19 @@ import com.badlogic.gdx.math.RandomXS128;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.indygame.States.GameStateManager;
+import com.indygame.States.MenuState;
+import com.indygame.States.PlayState;
 
 public class Indygame extends ApplicationAdapter {
-	SpriteBatch batch;
-	public static final int width = 720;
-	public static final int height = 1280;
-	Vector3 touchPos;
-	OrthographicCamera mainCamera;
+
+	public static final int width = 1080;
+	public static final int height = 1920;
+
+	private GameStateManager gsm;
+	private SpriteBatch batch;
+	//Vector3 touchPos;
+	//OrthographicCamera mainCamera;
 	float X, Y, K;
 	int upOrDown;
 	boolean isPointMove;
@@ -49,14 +55,17 @@ public class Indygame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		//TouchPosition
-		touchPos = new Vector3();
+		//touchPos = new Vector3();
 		//Cam
-		mainCamera = new OrthographicCamera();
-		mainCamera.setToOrtho(false, width, height);
+		//mainCamera = new OrthographicCamera();
+		//mainCamera.setToOrtho(false, width, height);
 		//Picture
 		//bColor = new Texture("bCol");
 		batch = new SpriteBatch();
-		finger = new Texture("finger.png");
+		gsm = new GameStateManager();
+		Gdx.gl.glClearColor(0,0,1,1);
+		gsm.push(new PlayState(gsm));
+		/*finger = new Texture("finger.png");
 		frame = new Texture("frame.png");
 		point = new Texture("point.png");
 		platformH = new Texture("platformH.png");
@@ -93,16 +102,18 @@ public class Indygame extends ApplicationAdapter {
 
 		p_d = new Rectangle();
 		//p_d.set(width / 2 - 20 / 2, 10 + 80 / 2, 80 , 20);
-		p_d.set(MathUtils.random(width - 80 / 2), PosMin, 80 , 20);
+		p_d.set(MathUtils.random(width - 80 / 2), PosMin, 80 , 20);*/
 
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(0,0,1,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		mainCamera.update();
+		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.render(batch);
+
+		/*mainCamera.update();
 
 		batch.setProjectionMatrix(mainCamera.combined);
 		batch.begin();
@@ -153,16 +164,24 @@ public class Indygame extends ApplicationAdapter {
 			p_d.x = X;
 			p_u.x = X;
 			//Point direction (K = tg of angle, upOrDown = up half-plane or down)
-			/*if (!isPointMove)
+			if (!isPointMove)
 			{
-				K = (MathUtils.random(10000) - 5000) / 100;
+
+				isPointMove = true;
+				K = 0;
+				while(K % 90 == 0) {
+					K = MathUtils.random(360);
+				}
+				batch.draw(point, Point.x, Point.y);
+
 				upOrDown = MathUtils.random(2);
-			}*/
+			}
 		}
 		else
 		{
 
 		}
+		*/
 	}
 
 	@Override
