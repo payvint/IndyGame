@@ -12,6 +12,8 @@ public class Point {
     public static final int beginVelocity = 700;
     private float angle;
     private Texture point;
+    public int quantityBouncing = 0;
+    private int coef = 0;
     public boolean isGameOn;
 
     public Point(int x, int y, int angle)
@@ -19,6 +21,7 @@ public class Point {
         position = new Vector3(x, y ,0);
         velocity = new Vector3(0, 0, 0);
         this.angle = (float) ((float) (angle / 180.0) * Math.PI);
+        coef = 1;
         point = new Texture("point.png");
     }
 
@@ -37,8 +40,10 @@ public class Point {
     public void update(float dt)
     {
         if (isGameOn) {
-            velocity.add(beginVelocity * MathUtils.cos(angle), beginVelocity * MathUtils.sin(angle), 0);
-
+            velocity.add((beginVelocity + coef) * MathUtils.cos(angle), (beginVelocity + coef) * MathUtils.sin(angle), 0);
+            if (quantityBouncing % 5 == 0 && quantityBouncing > 0) {
+                coef += 50;
+            }
             velocity.scl(dt);
             position.add(velocity.x, velocity.y, 0);
         }
