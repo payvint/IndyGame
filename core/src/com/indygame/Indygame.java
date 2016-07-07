@@ -19,34 +19,17 @@ import com.indygame.States.PlayState;
 
 public class Indygame extends ApplicationAdapter {
 
-	public static final int width = 1080;
-	public static final int height = 1920;
+	public static final int width = 720;
+	public static final int height = 1280;
 
 	private GameStateManager gsm;
 	private SpriteBatch batch;
 	//Vector3 touchPos;
-	//OrthographicCamera mainCamera;
+	OrthographicCamera mainCamera;
 	float X, Y, K;
 	int upOrDown;
 	boolean isPointMove;
 
-	TextButton press;
-
-	Texture finger;
-	Texture frame;
-	Texture point;
-	Texture platformH;
-	Texture platformV;
-	//Texture bColor;
-
-	//Music onGame;
-
-	//Rectangle bCol;
-	Rectangle Point;
-	Rectangle p_r;
-	Rectangle p_l;
-	Rectangle p_u;
-	Rectangle p_d;
 
 	//Lay
 	public static float PosMin = (height - width) / 2;
@@ -57,8 +40,8 @@ public class Indygame extends ApplicationAdapter {
 		//TouchPosition
 		//touchPos = new Vector3();
 		//Cam
-		//mainCamera = new OrthographicCamera();
-		//mainCamera.setToOrtho(false, width, height);
+		mainCamera = new OrthographicCamera();
+		mainCamera.setToOrtho(false, width, height);
 		//Picture
 		//bColor = new Texture("bCol");
 		batch = new SpriteBatch();

@@ -1,4 +1,5 @@
-CHANGED,/home/artem/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/indygame/Indygame$override.class
-CHANGED,/home/artem/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/indygame/Objects/Platform$override.class
-CHANGED,/home/artem/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/android/tools/fd/runtime/AppPatchesLoaderImpl.class
-CHANGED,/home/artem/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/indygame/States/PlayState$override.class
+CHANGED,/home/pinkpony008/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/indygame/States/MenuState$override.class
+CHANGED,/home/pinkpony008/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/indygame/Indygame$override.class
+CHANGED,/home/pinkpony008/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/indygame/States/State$override.class
+CHANGED,/home/pinkpony008/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/indygame/States/PlayState$override.class
+CHANGED,/home/pinkpony008/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/android/tools/fd/runtime/AppPatchesLoaderImpl.class
