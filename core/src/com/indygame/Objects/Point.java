@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Point {
     private Vector3 position, velocity;
-    public static final int beginVelocity = 500;
+    public static final int beginVelocity = 700;
     private float angle;
     private Texture point;
     public boolean isGameOn;

@@ -49,8 +49,8 @@ public class Indygame extends ApplicationAdapter {
 	Rectangle p_d;
 
 	//Lay
-	float PosMin = (height - width) / 2;
-	float PosMax = (height - width) / 2 + width;
+	public static float PosMin = (height - width) / 2;
+	public static float PosMax = (height - width) / 2 + width;
 
 	@Override
 	public void create () {
