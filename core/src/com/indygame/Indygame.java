@@ -98,7 +98,7 @@ public class Indygame extends ApplicationAdapter {
 
 		/*mainCamera.update();
 
-		batch.setProjectionMatrix(mainCamera.combined);
+			batch.setProjectionMatrix(mainCamera.combined);
 		batch.begin();
 
 		//batch.draw(bColor,bCol.x, bCol.y);

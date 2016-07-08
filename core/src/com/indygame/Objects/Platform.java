@@ -1,6 +1,7 @@
 package com.indygame.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 /**
@@ -10,6 +11,7 @@ public class Platform {
 
     private Vector3 position;
     private Texture platform;
+    private Rectangle rectangle;
 
     public Texture getPlatform() {
         return platform;
@@ -19,9 +21,14 @@ public class Platform {
     {
         position = new Vector3(x, y, 0);
         this.platform = platform;
+        rectangle = new Rectangle(position.x, position.y, this.platform.getWidth(), this.platform.getHeight());
     }
 
     public Vector3 getPosition() {
         return position;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 }

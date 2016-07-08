@@ -48,10 +48,17 @@ public class PlayState extends State {
 
     @Override
     public void update(float dt) {
-        if (!isGameOn) {
-            handleInput();
-        }
+        handleInput();
         point.update(dt);
+        if (point.collides(platformHorizontalDown.getRectangle()) || point.collides(platformHorizontalUp.getRectangle()))
+        {
+            point.indY *= -1;
+            point.quantityBouncing++;
+        }
+        if (point.collides(platformVerticalLeft.getRectangle()) || point.collides(platformVerticalRight.getRectangle())) {
+            point.indX *= -1;
+            point.quantityBouncing++;
+        }
         camera.update();
     }
 
