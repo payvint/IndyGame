@@ -1,33 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
     abi="armeabi-v7a,armeabi"
-    api-level="19"
+    api-level="23"
     density="xhdpi"
     format="7"
-    timestamp="22859265592284"
-    token="8073558312203248829" >
+    timestamp="139887288035030"
+    token="-5111490886606459367" >
 
     <task
         name="javac"
-        duration="45" />
+        duration="82" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="6" />
+        duration="14" />
     <task
         name="verifier"
-        duration="1" />
+        duration="2" />
 
     <artifact
-        location="/home/artem/IndyGame/android/build/outputs/apk/android-debug.apk"
-        type="MAIN" />
+        location="/home/pinkpony008/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+        type="DEX" />
+    <artifact
+        location="/home/pinkpony008/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex"
+        type="DEX" />
 
-    <build timestamp="22859265592284" >
+    <build timestamp="137038205387592" >
         <artifact
-            location="/home/artem/IndyGame/android/build/outputs/apk/android-debug.apk"
+            location="/home/pinkpony008/IndyGame/android/build/outputs/apk/android-debug.apk"
             type="MAIN" />
+    </build>
+    <build timestamp="138346939607291" >
+        <artifact
+            location="/home/pinkpony008/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+            type="DEX" />
+    </build>
+    <build timestamp="138719672200103" >
+        <artifact
+            location="/home/pinkpony008/IndyGame/android/build/intermediates/res/resources-debug.ap_"
+            type="RESOURCES" />
+    </build>
+    <build timestamp="139887288035030" >
+        <artifact
+            location="/home/pinkpony008/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+            type="DEX" />
+        <artifact
+            location="/home/pinkpony008/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex"
+            type="DEX" />
     </build>
 
 </instant-run>
