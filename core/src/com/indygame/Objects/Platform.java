@@ -12,15 +12,21 @@ public class Platform {
     private Vector3 position;
     private Texture platform;
     private Rectangle rectangle;
+    private int angle;
+
+    public int getAngle() {
+        return angle;
+    }
 
     public Texture getPlatform() {
         return platform;
     }
 
-    public Platform(int x, float y, Texture platform)
+    public Platform(int x, float y, Texture platform, int angle)
     {
         position = new Vector3(x, y, 0);
         this.platform = platform;
+        this.angle = angle;
         rectangle = new Rectangle(position.x, position.y, this.platform.getWidth(), this.platform.getHeight());
     }
 

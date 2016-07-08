@@ -10,21 +10,22 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Point {
     private Vector3 position;
-    public Vector3 velocity;
-    public static final int beginVelocity = 700;
+    private Vector3 velocity;
+    private static final int beginVelocity = 500;
     private float angle;
+    private int angleInt;
     private Texture point;
     public int quantityBouncing = 0;
     private int coefficient = 0;
     public boolean isGameOn;
     private Rectangle pointRectangle;
-    public int indX = 1, indY = 1;
 
     public Point(int x, int y, int angle)
     {
         position = new Vector3(x, y ,0);
         velocity = new Vector3(0, 0, 0);
         this.angle = (float) ((float) (angle / 180.0) * Math.PI);
+        angleInt = angle;
         point = new Texture("point.png");
         pointRectangle = new Rectangle(position.x, position.y, point.getWidth(), point.getHeight());
     }
@@ -40,7 +41,7 @@ public class Point {
     public void update(float dt)
     {
         if (isGameOn) {
-            velocity.add(indX * (beginVelocity + coefficient) * MathUtils.cos(angle), indY * (beginVelocity + coefficient) * MathUtils.sin(angle), 0);
+            velocity.add((beginVelocity + coefficient) * MathUtils.cos(angle), (beginVelocity + coefficient) * MathUtils.sin(angle), 0);
             if (quantityBouncing % 5 == 0 && quantityBouncing > 0) {
                 coefficient += 50;
             }
@@ -54,5 +55,12 @@ public class Point {
     public boolean collides(Rectangle platform)
     {
         return pointRectangle.overlaps(platform);
+    }
+
+    public void angleMirrorRotation(int angle)
+    {
+        this.angleInt = (this.angleInt + 360 - 180) % 360;
+        this.angleInt += ((angle - this.angleInt) * 2 + 720) % 360;
+        this.angle = (float) ((float) (this.angleInt / 180.0) * Math.PI);
     }
 }
