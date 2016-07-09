@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 public class Point {
     private Vector3 position;
     private Vector3 velocity;
-    private static final int beginVelocity = 300;
+    private int beginVelocity = 300;
     private float angle;
     private int angleInt;
     private Texture point;
@@ -19,6 +19,7 @@ public class Point {
     private int coefficient = 0;
     public boolean isGameOn;
     private Rectangle pointRectangle;
+    private boolean added = false;
 
     public Point(int x, int y, int angle)
     {
@@ -42,8 +43,13 @@ public class Point {
     {
         if (isGameOn) {
             velocity.add((beginVelocity + coefficient) * MathUtils.cos(angle), (beginVelocity + coefficient) * MathUtils.sin(angle), 0);
-            if (quantityBouncing % 5 == 0 && quantityBouncing > 0) {
+            if (quantityBouncing % 5 == 0 && quantityBouncing > 0 && !added) {
                 coefficient += 50;
+                added = true;
+            }
+            if (quantityBouncing % 5 == 1)
+            {
+                added = false;
             }
             velocity.scl(dt);
             position.add(velocity.x, velocity.y, 0);
