@@ -19,16 +19,18 @@ import com.indygame.States.PlayState;
 
 public class Indygame extends ApplicationAdapter {
 
-	public static final int width = 720;
-	public static final int height = 1280;
+	public static final int width = 480;
+	public static final int height = 800;
 
 	private GameStateManager gsm;
 	private SpriteBatch batch;
 
 
 	//Lay
-	public static float PosMin = (height - width) / 2;
-	public static float PosMax = (height - width) / 2 + width;
+	//public static float PosMin = (height - width) / 2;
+	//public static float PosMax = (height - width) / 2 + width;
+	public static float PosMin = height - 100 - width;
+	public static float PosMax = height - 100;
 
 	@Override
 	public void create () {

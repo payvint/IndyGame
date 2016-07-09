@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 public class Point {
     private Vector3 position;
     private Vector3 velocity;
-    private int beginVelocity = 300;
+    private int beginVelocity = 200;
     private float angle;
     private int angleInt;
     private Texture point;

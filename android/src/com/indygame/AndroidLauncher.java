@@ -13,6 +13,9 @@ public class AndroidLauncher extends AndroidApplication {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useCompass = false;
 		config.useAccelerometer = false;
+		config.hideStatusBar = false;
+		config.useImmersiveMode = true;
+
 		initialize(new Indygame(), config);
 	}
 }

@@ -65,14 +65,16 @@ public class PlayState extends State {
             dY = platformLeft.getPosition().y - touchPos.y;
 
         }
-        if(Gdx.input.isTouched())
+        else if(Gdx.input.isTouched())
         {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
 
-            platformDown.getPosition().x = touchPos.x + dX;
+            //platformDown.getPosition().x = touchPos.x + dX;
+            platformDown.getPosition().x = touchPos.x;
             platformUp.getPosition().x = platformDown.getPosition().x + cX;
-            platformLeft.getPosition().y = touchPos.y + dY;
+            //platformLeft.getPosition().y = touchPos.y + dY;
+            platformLeft.getPosition().y = touchPos.y;
             platformRight.getPosition().y = platformLeft.getPosition().y + cY;
 
 
@@ -148,7 +150,7 @@ public class PlayState extends State {
         sb.draw(platformRight.getPlatform(), platformRight.getPosition().x, platformRight.getPosition().y);
 
         if (!isGameOn) {
-            sb.draw(finger, Indygame.width / 2 - finger.getWidth() / 2, Indygame.height / 2 - finger.getHeight() / 2);
+            sb.draw(finger, Indygame.width / 2, Indygame.PosMin / 2);
         }
         else
         {

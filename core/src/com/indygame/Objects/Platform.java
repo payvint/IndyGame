@@ -30,10 +30,6 @@ public class Platform {
         rectangle = new Rectangle(position.x, position.y, this.platform.getWidth(), this.platform.getHeight());
     }
 
-    public void dPos(float x, float y){
-        position.set(x,y,0);
-    }
-
     public Vector3 getPosition() {
         return position;
     }
