@@ -11,7 +11,7 @@ public class Platform {
 
     private Vector3 position;
     private Texture platform;
-    private Rectangle rectangle;
+    public Rectangle rectangle;
     private int angle;
 
     public int getAngle() {
@@ -28,6 +28,10 @@ public class Platform {
         this.platform = platform;
         this.angle = angle;
         rectangle = new Rectangle(position.x, position.y, this.platform.getWidth(), this.platform.getHeight());
+    }
+
+    public void dPos(float x, float y){
+        position.set(x,y,0);
     }
 
     public Vector3 getPosition() {

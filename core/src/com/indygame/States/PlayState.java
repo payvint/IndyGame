@@ -34,7 +34,7 @@ public class PlayState extends State {
         camera.setToOrtho(false, Indygame.width, Indygame.height);
         background = new Texture("bCol.png");
         platformDown = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMin, new Texture("platformHD.png"), 90);
-        platformUp = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMax, new Texture("platformHU.png"), 270);
+        platformUp = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMax , new Texture("platformHU.png"), 270);
         platformLeft = new Platform(0, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVL.png"), 0);
         platformRight = new Platform(Indygame.width - 10 - 20 / 2, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVR.png"), 180);
         frame = new Texture("frame.png");
@@ -97,6 +97,11 @@ public class PlayState extends State {
                 platformDown.getPosition().x = Indygame.width + platformDown.getPosition().x;
 
         }
+        platformDown.rectangle.setPosition(platformDown.getPosition().x, platformDown.getPosition().y);
+        platformUp.rectangle.setPosition(platformUp.getPosition().x, platformUp.getPosition().y);
+        platformLeft.rectangle.setPosition(platformLeft.getPosition().x, platformLeft.getPosition().y);
+        platformRight.rectangle.setPosition(platformRight.getPosition().x, platformRight.getPosition().y);
+
     }
 
     @Override
