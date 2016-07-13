@@ -13,6 +13,7 @@ public class Platform {
     private Texture platform;
     public Rectangle rectangle;
     private int angle;
+    public Vector3 savePos;
 
     public int getAngle() {
         return angle;
@@ -25,6 +26,7 @@ public class Platform {
     public Platform(int x, float y, Texture platform, int angle)
     {
         position = new Vector3(x, y, 0);
+        savePos = new Vector3(x, y, 0);
         this.platform = platform;
         this.angle = angle;
         rectangle = new Rectangle(position.x, position.y, this.platform.getWidth(), this.platform.getHeight());

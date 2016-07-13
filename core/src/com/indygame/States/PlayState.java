@@ -2,12 +2,16 @@ package com.indygame.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.indygame.Indygame;
 import com.indygame.Objects.Platform;
 import com.indygame.Objects.Point;
+
+import javafx.scene.text.Text;
 
 /**
  * Created by artem on 06.07.16.
@@ -23,10 +27,11 @@ public class PlayState extends State {
     private Texture frame;
     private Texture finger;
     private boolean isGameOn;
-
     //touch control
     Vector3 touchPos;
-    float  cX, cY, dX, dY;
+    float  cX, cY;
+
+    BitmapFont score;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -44,37 +49,37 @@ public class PlayState extends State {
         cX = platformDown.getPosition().x - platformUp.getPosition().x;
         cY = platformLeft.getPosition().y - platformRight.getPosition().y;
         touchPos = new Vector3();
+
+        score = new BitmapFont();
+    }
+
+    private String toString(int quantityBouncing) {
+        return ""+quantityBouncing+"";
     }
 
     @Override
     protected void handleInput() {
-        if (Gdx.input.isTouched())
+        if (Gdx.input.justTouched())
         {
             isGameOn = true;
             point.isGameOn = true;
+            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            platformDown.savePos.set(platformDown.getPosition().x - touchPos.x, platformLeft.getPosition().y - touchPos.y, 0);
         }
     }
 
     protected void PlatformPos()
     {
-        if(Gdx.input.justTouched())
-        {
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-
-            dX = platformDown.getPosition().x - touchPos.x;
-            dY = platformLeft.getPosition().y - touchPos.y;
-
-        }
-        else if(Gdx.input.isTouched())
+        if(Gdx.input.isTouched())
         {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
 
-            //platformDown.getPosition().x = touchPos.x + dX;
-            platformDown.getPosition().x = touchPos.x;
+            platformDown.getPosition().x = touchPos.x + platformDown.savePos.x;
+            //platformDown.getPosition().x = touchPos.x;
             platformUp.getPosition().x = platformDown.getPosition().x + cX;
-            //platformLeft.getPosition().y = touchPos.y + dY;
-            platformLeft.getPosition().y = touchPos.y;
+            platformLeft.getPosition().y = touchPos.y + platformLeft.savePos.y;
+            //platformLeft.getPosition().y = touchPos.y;
             platformRight.getPosition().y = platformLeft.getPosition().y + cY;
 
 
@@ -144,6 +149,7 @@ public class PlayState extends State {
         sb.begin();
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
         //PlatformPos();
+        score.draw(sb,"Score: " + point.quantityBouncing, 20, Indygame.height - 50);
         sb.draw(platformDown.getPlatform(), platformDown.getPosition().x, platformDown.getPosition().y);
         sb.draw(platformUp.getPlatform(), platformUp.getPosition().x, platformUp.getPosition().y);
         sb.draw(platformLeft.getPlatform(), platformLeft.getPosition().x, platformLeft.getPosition().y);
