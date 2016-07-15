@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
+    abi="x86"
     api-level="23"
-    density="xhdpi"
+    density="420dpi"
     format="7"
-    timestamp="4388496922386"
-    token="-5111490886606459367" >
+    timestamp="8286919238411"
+    token="8073558312203248829" >
 
     <task
         name="javac"
-        duration="78" />
+        duration="55" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="24" />
+        duration="11" />
     <task
         name="verifier"
-        duration="1" />
+        duration="2" />
 
     <artifact
-        location="/home/pinkpony008/IndyGame/android/build/outputs/apk/android-debug.apk"
-        type="MAIN" />
+        location="/home/artem/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+        type="DEX" />
 
-    <build timestamp="171275590208361" >
+    <build timestamp="6971325593434" >
         <artifact
-            location="/home/pinkpony008/IndyGame/android/build/intermediates/res/resources-debug.ap_"
-            type="RESOURCES" />
+            location="/home/artem/IndyGame/android/build/outputs/apk/android-debug.apk"
+            type="MAIN" />
+    </build>
+    <build timestamp="7696651752004" >
+        <artifact
+            location="/home/artem/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
+            type="DEX" />
+    </build>
+    <build timestamp="8286919238411" >
+        <artifact
+            location="/home/artem/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+            type="DEX" />
     </build>
 
 </instant-run>

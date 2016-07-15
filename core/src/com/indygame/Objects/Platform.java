@@ -23,7 +23,7 @@ public class Platform {
         return platform;
     }
 
-    public Platform(int x, float y, Texture platform, int angle)
+    public Platform(float x, float y, Texture platform, int angle)
     {
         position = new Vector3(x, y, 0);
         savePos = new Vector3(x, y, 0);

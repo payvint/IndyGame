@@ -35,13 +35,13 @@ public class PlayState extends State {
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        point = new Point(Indygame.width / 2 - 50, Indygame.height / 2 - 50, MathUtils.random(360));
+        point = new Point(Indygame.width / 2 - 35, (int) ((Indygame.PosMax + Indygame.PosMin) / 2 - 35), MathUtils.random(360));
         camera.setToOrtho(false, Indygame.width, Indygame.height);
         background = new Texture("bCol.png");
-        platformDown = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMin, new Texture("platformHD.png"), 90);
-        platformUp = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMax , new Texture("platformHU.png"), 270);
-        platformLeft = new Platform(0, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVL.png"), 0);
-        platformRight = new Platform(Indygame.width - 10 - 20 / 2, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVR.png"), 180);
+        platformDown = new Platform(Indygame.width / 2 - 80 / 2, Indygame.PosMin, new Texture("platformHD.png"), 90);
+        platformUp = new Platform(Indygame.width / 2 - 80 / 2, Indygame.PosMax, new Texture("platformHU.png"), 270);
+        platformLeft = new Platform(0, Indygame.width / 2 - 80 / 2 + Indygame.PosMin, new Texture("platformVL.png"), 0);
+        platformRight = new Platform(Indygame.width - 20, Indygame.width / 2 - 80 / 2 + Indygame.PosMin, new Texture("platformVR.png"), 180);
         frame = new Texture("frame.png");
         finger = new Texture("finger.png");
         isGameOn = false;
@@ -64,7 +64,9 @@ public class PlayState extends State {
             isGameOn = true;
             point.isGameOn = true;
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            platformDown.savePos.set(platformDown.getPosition().x - touchPos.x, platformLeft.getPosition().y - touchPos.y, 0);
+            camera.unproject(touchPos);
+            platformDown.savePos.set(platformDown.getPosition().x - touchPos.x, 0, 0);
+            platformLeft.savePos.set(0, platformLeft.getPosition().y - touchPos.y, 0);
         }
     }
 
@@ -116,27 +118,25 @@ public class PlayState extends State {
         handleInput();
         PlatformPos();
         point.update(dt);
-        if (point.collides(platformDown.getRectangle()))
-        {
-            point.angleMirrorRotation(platformDown.getAngle());
-            point.quantityBouncing++;
+        if (point.getPosition().x < Indygame.width - 19 || point.getPosition().x > 19 || point.getPosition().y > Indygame.PosMin + 19 || point.getPosition().y < Indygame.PosMax + platformUp.getPlatform().getHeight() - 19) {
+            if (point.collides(platformDown.getRectangle())) {
+                point.angleMirrorRotation(platformDown.getAngle());
+                point.quantityBouncing++;
+            }
+            if (point.collides(platformUp.getRectangle())) {
+                point.angleMirrorRotation(platformUp.getAngle());
+                point.quantityBouncing++;
+            }
+            if (point.collides(platformLeft.getRectangle())) {
+                point.angleMirrorRotation(platformLeft.getAngle());
+                point.quantityBouncing++;
+            }
+            if (point.collides(platformRight.getRectangle())) {
+                point.angleMirrorRotation(platformRight.getAngle());
+                point.quantityBouncing++;
+            }
         }
-        if (point.collides(platformUp.getRectangle()))
-        {
-            point.angleMirrorRotation(platformUp.getAngle());
-            point.quantityBouncing++;
-        }
-        if (point.collides(platformLeft.getRectangle()))
-        {
-            point.angleMirrorRotation(platformLeft.getAngle());
-            point.quantityBouncing++;
-        }
-        if (point.collides(platformRight.getRectangle()))
-        {
-            point.angleMirrorRotation(platformRight.getAngle());
-            point.quantityBouncing++;
-        }
-        if (point.getPosition().x < 0 || point.getPosition().x > Indygame.width - point.getPoint().getWidth() || point.getPosition().y < Indygame.PosMin || point.getPosition().y > Indygame.PosMax)
+        if (point.getPosition().x < 15 || point.getPosition().x > Indygame.width - point.getPoint().getWidth() - 15 || point.getPosition().y < Indygame.PosMin + 15 || point.getPosition().y > Indygame.PosMax + platformUp.getPlatform().getHeight() - point.getPoint().getHeight() - 15)
         {
             gsm.set(new PlayState(gsm));
         }

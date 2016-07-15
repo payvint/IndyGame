@@ -21,7 +21,7 @@ public class Point {
     private Rectangle pointRectangle;
     private boolean added = false;
 
-    public Point(int x, int y, int angle)
+    public Point(float x, float y, int angle)
     {
         position = new Vector3(x, y ,0);
         velocity = new Vector3(0, 0, 0);
@@ -44,7 +44,7 @@ public class Point {
         if (isGameOn) {
             velocity.add((beginVelocity + coefficient) * MathUtils.cos(angle), (beginVelocity + coefficient) * MathUtils.sin(angle), 0);
             if (quantityBouncing % 5 == 0 && quantityBouncing > 0 && !added) {
-                coefficient += 50;
+                coefficient += 25;
                 added = true;
             }
             if (quantityBouncing % 5 == 1)
