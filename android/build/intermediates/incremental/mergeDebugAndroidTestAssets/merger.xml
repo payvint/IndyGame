@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/artem/IndyGame/android/src/androidTest/assets"/><source path="/home/artem/IndyGame/android/build/generated/assets/shaders/androidTest/debug"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/pinkpony008/IndyGame/android/src/androidTest/assets"/><source path="/home/pinkpony008/IndyGame/android/build/generated/assets/shaders/androidTest/debug"/></dataSet></merger>

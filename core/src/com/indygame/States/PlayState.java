@@ -29,7 +29,7 @@ public class PlayState extends State {
     private boolean isGameOn;
     private boolean getTouch;
     //touch control
-    Vector3 touchPos;
+    //Vector3 touchPos;
     float  cX, cY;
 
     BitmapFont score;
@@ -51,7 +51,7 @@ public class PlayState extends State {
 
         cX = platformDown.getPosition().x - platformUp.getPosition().x;
         cY = platformLeft.getPosition().y - platformRight.getPosition().y;
-        touchPos = new Vector3();
+        //touchPos = new Vector3();
 
         score = new BitmapFont();
     }
