@@ -27,6 +27,7 @@ public class PlayState extends State {
     private Texture frame;
     private Texture finger;
     private boolean isGameOn;
+    private boolean getTouch;
     //touch control
     Vector3 touchPos;
     float  cX, cY;
@@ -38,10 +39,12 @@ public class PlayState extends State {
         point = new Point(Indygame.width / 2 - 35, (int) ((Indygame.PosMax + Indygame.PosMin) / 2 - 35), MathUtils.random(360));
         camera.setToOrtho(false, Indygame.width, Indygame.height);
         background = new Texture("bCol.png");
-        platformDown = new Platform(Indygame.width / 2 - 80 / 2, Indygame.PosMin, new Texture("platformHD.png"), 90);
-        platformUp = new Platform(Indygame.width / 2 - 80 / 2, Indygame.PosMax, new Texture("platformHU.png"), 270);
-        platformLeft = new Platform(0, Indygame.width / 2 - 80 / 2 + Indygame.PosMin, new Texture("platformVL.png"), 0);
-        platformRight = new Platform(Indygame.width - 20, Indygame.width / 2 - 80 / 2 + Indygame.PosMin, new Texture("platformVR.png"), 180);
+
+        platformDown = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMin, new Texture("platformHD.png"), 90);
+        platformUp = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMax , new Texture("platformHU.png"), 270);
+        platformLeft = new Platform(0, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVL.png"), 0);
+        platformRight = new Platform(Indygame.width - 10 - 20 / 2, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVR.png"), 180);
+
         frame = new Texture("frame.png");
         finger = new Texture("finger.png");
         isGameOn = false;
@@ -53,20 +56,12 @@ public class PlayState extends State {
         score = new BitmapFont();
     }
 
-    /*private String toString(int quantityBouncing) {
-        return ""+quantityBouncing+"";
-    }*/
-
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched())
         {
             isGameOn = true;
             point.isGameOn = true;
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
-            platformDown.savePos.set(platformDown.getPosition().x - touchPos.x, 0);
-            platformLeft.savePos.set(0, platformLeft.getPosition().y - touchPos.y);
         }
     }
 
@@ -76,46 +71,24 @@ public class PlayState extends State {
         {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
-            platformDown.getPosition().x = touchPos.x + platformDown.savePos.x;
-            //platformDown.getPosition().x = touchPos.x;
-            platformUp.getPosition().x = platformDown.getPosition().x + cX;
-            platformLeft.getPosition().y = touchPos.y + platformLeft.savePos.y;
-            //platformLeft.getPosition().y = touchPos.y;
-            platformRight.getPosition().y = platformLeft.getPosition().y + cY;
-
-            /*if(platformRight.getPosition().y > Indygame.PosMax - 80 / 2)
-                platformRight.getPosition().y = Indygame.PosMin + (platformRight.getPosition().y - Indygame.PosMax) + 80 / 2;
-            else if(platformRight.getPosition().y < Indygame.PosMin + 80 / 2)
-                platformRight.getPosition().y = Indygame.PosMax - (Indygame.PosMin - platformRight.getPosition().y) - 80 / 2;
-
-            if(platformLeft.getPosition().y > Indygame.PosMax - 80 / 2)
-                platformLeft.getPosition().y = Indygame.PosMin + (platformLeft.getPosition().y - Indygame.PosMax) + 80 / 2;
-            else if(platformLeft.getPosition().y < Indygame.PosMin + 80 / 2)
-                platformLeft.getPosition().y = Indygame.PosMax - (Indygame.PosMin - platformLeft.getPosition().y) - 80 / 2;
-
-            if(platformUp.getPosition().x > Indygame.width - 80 / 2)
-                platformUp.getPosition().x = platformUp.getPosition().x - Indygame.width;
-            else if(platformUp.getPosition().x < 80 / 2)
-                platformUp.getPosition().x = Indygame.width + platformUp.getPosition().x;
-
-            if(platformDown.getPosition().x > Indygame.width - 80 / 2)
-                platformDown.getPosition().x = platformDown.getPosition().x - Indygame.width;
-            else if(platformDown.getPosition().x < 80 / 2)
-                platformDown.getPosition().x = Indygame.width + platformDown.getPosition().x;*/
-
-            //touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            //camera.unproject(touchPos);
-
+            if (!getTouch)
+            {
+                platformDown.savePos.set(platformDown.getPosition().x - touchPos.x, 0);
+                platformLeft.savePos.set(0, platformLeft.getPosition().y - touchPos.y);
+                getTouch = true;
+            }
         }
-        platformDown.rectangle.setPosition(platformDown.getPosition().x, platformDown.getPosition().y);
-        platformUp.rectangle.setPosition(platformUp.getPosition().x, platformUp.getPosition().y);
-        platformLeft.rectangle.setPosition(platformLeft.getPosition().x, platformLeft.getPosition().y);
-        platformRight.rectangle.setPosition(platformRight.getPosition().x, platformRight.getPosition().y);
-
+        else
+            getTouch = false;
     }
 
     protected void Scroll()
     {
+        platformDown.getPosition().x = touchPos.x + platformDown.savePos.x;
+        platformUp.getPosition().x = platformDown.getPosition().x + cX;
+        platformLeft.getPosition().y = touchPos.y + platformLeft.savePos.y;
+        platformRight.getPosition().y = platformLeft.getPosition().y + cY;
+
         if(platformRight.getPosition().y > Indygame.PosMax - 60)
             platformRight.getPosition().y = Indygame.PosMin + (platformRight.getPosition().y - Indygame.PosMax + 60);
         else if(platformRight.getPosition().y < Indygame.PosMin)
@@ -135,6 +108,7 @@ public class PlayState extends State {
             platformDown.getPosition().x = platformDown.getPosition().x - Indygame.width + 80;
         else if(platformDown.getPosition().x < 0)
             platformDown.getPosition().x = Indygame.width + platformDown.getPosition().x - 80;
+
         platformDown.rectangle.setPosition(platformDown.getPosition().x, platformDown.getPosition().y);
         platformUp.rectangle.setPosition(platformUp.getPosition().x, platformUp.getPosition().y);
         platformLeft.rectangle.setPosition(platformLeft.getPosition().x, platformLeft.getPosition().y);
@@ -177,7 +151,6 @@ public class PlayState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
-        //PlatformPos();
         score.draw(sb,"Score: " + point.quantityBouncing, 20, Indygame.height - 50);
         sb.draw(platformDown.getPlatform(), platformDown.getPosition().x, platformDown.getPosition().y);
         sb.draw(platformUp.getPlatform(), platformUp.getPosition().x, platformUp.getPosition().y);
