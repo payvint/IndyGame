@@ -2,6 +2,7 @@ package com.indygame.Objects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 /**
@@ -9,11 +10,12 @@ import com.badlogic.gdx.math.Vector3;
  */
 public class Platform {
 
-    private Vector3 position;
+    private Vector2 position;
     private Texture platform;
     public Rectangle rectangle;
     private int angle;
-    public Vector3 savePos;
+    public Vector2 savePos;
+    public Vector2 centralPosition;
 
     public int getAngle() {
         return angle;
@@ -25,14 +27,15 @@ public class Platform {
 
     public Platform(float x, float y, Texture platform, int angle)
     {
-        position = new Vector3(x, y, 0);
-        savePos = new Vector3(x, y, 0);
+        position = new Vector2(x, y);
+        savePos = new Vector2(x, y);
         this.platform = platform;
         this.angle = angle;
+        int angleRot = angle % 90;
         rectangle = new Rectangle(position.x, position.y, this.platform.getWidth(), this.platform.getHeight());
     }
 
-    public Vector3 getPosition() {
+    public Vector2 getPosition() {
         return position;
     }
 

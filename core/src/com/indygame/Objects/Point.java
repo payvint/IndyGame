@@ -3,14 +3,15 @@ package com.indygame.Objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 /**
  * Created by artem on 07.07.16.
  */
 public class Point {
-    private Vector3 position;
-    private Vector3 velocity;
+    private Vector2 position;
+    private Vector2 velocity;
     private int beginVelocity = 200;
     private float angle;
     private int angleInt;
@@ -23,15 +24,15 @@ public class Point {
 
     public Point(float x, float y, int angle)
     {
-        position = new Vector3(x, y ,0);
-        velocity = new Vector3(0, 0, 0);
+        position = new Vector2(x, y);
+        velocity = new Vector2(0, 0);
         this.angle = (float) ((float) (angle / 180.0) * Math.PI);
         angleInt = angle;
         point = new Texture("point.png");
         pointRectangle = new Rectangle(position.x, position.y, point.getWidth(), point.getHeight());
     }
 
-    public Vector3 getPosition() {
+    public Vector2 getPosition() {
         return position;
     }
 
@@ -42,7 +43,7 @@ public class Point {
     public void update(float dt)
     {
         if (isGameOn) {
-            velocity.add((beginVelocity + coefficient) * MathUtils.cos(angle), (beginVelocity + coefficient) * MathUtils.sin(angle), 0);
+            velocity.add((beginVelocity + coefficient) * MathUtils.cos(angle), (beginVelocity + coefficient) * MathUtils.sin(angle));
             if (quantityBouncing % 5 == 0 && quantityBouncing > 0 && !added) {
                 coefficient += 25;
                 added = true;
@@ -52,7 +53,7 @@ public class Point {
                 added = false;
             }
             velocity.scl(dt);
-            position.add(velocity.x, velocity.y, 0);
+            position.add(velocity.x, velocity.y);
             pointRectangle.setPosition(position.x, position.y);
 
         }
