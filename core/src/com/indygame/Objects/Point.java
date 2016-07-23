@@ -21,6 +21,8 @@ public class Point {
     public boolean isGameOn;
     private Rectangle pointRectangle;
     private boolean added = false;
+    public Vector2 centralPosition;
+    public int lastCollibe;
 
     public Point(float x, float y, int angle)
     {
@@ -29,6 +31,18 @@ public class Point {
         this.angle = (float) ((float) (angle / 180.0) * Math.PI);
         angleInt = angle;
         point = new Texture("point.png");
+        lastCollibe = 0;
+        /*double beta, angleMod = (float) ((float) ((angle % 180) / 180.0) * Math.PI);
+        if (angle % 180 > 0 && angle % 180 <= 90)
+        {
+            beta = ((angleMod - Math.atan(this.point.getWidth() / this.point.getHeight())) + MathUtils.PI * 4) % (MathUtils.PI * 2);
+        }
+        else
+        {
+            beta = ((Math.atan(this.point.getWidth() / this.point.getHeight()) - angleMod) + MathUtils.PI * 4) % (MathUtils.PI * 2);
+        }
+        double diagonal = Math.sqrt(this.point.getWidth() * this.point.getWidth() + this.point.getHeight() * this.point.getHeight());
+        centralPosition = new Vector2(x + (float)(Math.cos(beta) * (diagonal / 2.0)), y + (float)(Math.sin(beta) * (diagonal / 2.0)));*/
         pointRectangle = new Rectangle(position.x, position.y, point.getWidth(), point.getHeight());
     }
 
@@ -55,13 +69,27 @@ public class Point {
             velocity.scl(dt);
             position.add(velocity.x, velocity.y);
             pointRectangle.setPosition(position.x, position.y);
-
         }
 
     }
-    public boolean collides(Rectangle platform)
+
+    public void setCentralPosition()
     {
-        return pointRectangle.overlaps(platform);
+        double beta = Math.atan(this.point.getHeight() / this.point.getWidth());
+
+        double diagonal = Math.sqrt(this.point.getWidth() * this.point.getWidth() + this.point.getHeight() * this.point.getHeight());
+        centralPosition = new Vector2(position.x + (float)(Math.cos(beta) * (diagonal / 2.0)), position.y + (float)(Math.sin(beta) * (diagonal / 2.0)));
+    }
+
+    public boolean collides(Platform platform)
+    {
+        double x = platform.centralPosition.x - centralPosition.x;
+        double xConstant = 20;
+        double y = platform.centralPosition.y - centralPosition.y;
+        double yConstant = 45;
+        double distance = Math.sqrt(x * x + y * y);
+        double maxDistance = Math.sqrt(xConstant * xConstant + yConstant * yConstant);
+        return maxDistance >= distance;
     }
 
     public void angleMirrorRotation(int angle)
