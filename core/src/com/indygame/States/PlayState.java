@@ -38,7 +38,7 @@ public class PlayState extends State {
     public PlayState(GameStateManager gsm) {
         super(gsm);
         angle = MathUtils.random(360);
-        while((angle > 80 && angle < 100) || (angle > 170 && angle < 190) || (angle > 260 && angle < 280) || (angle > 350 && angle < 10))
+        while((angle > 80 && angle < 100) || (angle > 170 && angle < 190) || (angle > 260 && angle < 280) || angle > 350 || angle < 10)
             angle = MathUtils.random(360);
         point = new Point(Indygame.width / 2 - 35, (int) ((Indygame.PosMax + Indygame.PosMin) / 2 - 35), angle);
         camera.setToOrtho(false, Indygame.width, Indygame.height);
@@ -129,7 +129,7 @@ public class PlayState extends State {
             {
                 point.setCentralPosition();
                 platformLeft.setCentralPosition();
-                if (point.collides(platformLeft) && point.lastCollibe != 3) {
+                if (point.collides(platformLeft) && point.lastCollibe != 3 && point.centralPosition.y <= platformLeft.centralPosition.y + 20 && point.centralPosition.y >= platformLeft.centralPosition.y - 20) {
                     point.angleMirrorRotation(platformLeft.getAngle());
                     point.quantityBouncing++;
                     point.lastCollibe = 3;
@@ -139,7 +139,7 @@ public class PlayState extends State {
             {
                 point.setCentralPosition();
                 platformRight.setCentralPosition();
-                if (point.collides(platformRight) && point.lastCollibe != 1) {
+                if (point.collides(platformRight) && point.lastCollibe != 1 && point.centralPosition.y <= platformRight.centralPosition.y + 20 && point.centralPosition.y >= platformRight.centralPosition.y - 20) {
                     point.angleMirrorRotation(platformRight.getAngle());
                     point.quantityBouncing++;
                     point.lastCollibe = 1;
@@ -149,7 +149,7 @@ public class PlayState extends State {
             {
                 point.setCentralPosition();
                 platformDown.setCentralPosition();
-                if (point.collides(platformDown) && point.lastCollibe != 2) {
+                if (point.collides(platformDown) && point.lastCollibe != 2 && point.centralPosition.x <= platformDown.centralPosition.x + 20 && point.centralPosition.x >= platformDown.centralPosition.x - 20) {
                     point.angleMirrorRotation(platformDown.getAngle());
                     point.quantityBouncing++;
                     point.lastCollibe = 2;
@@ -159,7 +159,7 @@ public class PlayState extends State {
             {
                 point.setCentralPosition();
                 platformUp.setCentralPosition();
-                if (point.collides(platformUp) && point.lastCollibe != 4)
+                if (point.collides(platformUp) && point.lastCollibe != 4 && point.centralPosition.x <= platformUp.centralPosition.x + 20 && point.centralPosition.x >= platformUp.centralPosition.x - 20)
                 {
                     point.angleMirrorRotation(platformUp.getAngle());
                     point.quantityBouncing++;
