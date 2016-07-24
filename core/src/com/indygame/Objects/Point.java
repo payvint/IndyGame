@@ -84,7 +84,7 @@ public class Point {
     public boolean collides(Platform platform)
     {
         double x = platform.centralPosition.x - centralPosition.x;
-        double xConstant = 20;
+        double xConstant = 40;
         double y = platform.centralPosition.y - centralPosition.y;
         double yConstant = 45;
         double distance = Math.sqrt(x * x + y * y);

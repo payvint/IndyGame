@@ -1,0 +1,2 @@
+CHANGED,/home/pinkpony008/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/indygame/States/PlayState.class
+CHANGED,/home/pinkpony008/IndyGame/android/build/intermediates/transforms/instantRun/debug/folders/1/5/main/com/indygame/Objects/Point.class
