@@ -2,6 +2,7 @@ package com.indygame;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -31,9 +32,15 @@ public class Indygame extends ApplicationAdapter {
 	//public static float PosMax = (height - width) / 2 + width;
 	public static float PosMin = height - 100 - width;
 	public static float PosMax = height - 100;
+	public static Preferences prefs;// = Gdx.app.getPreferences("MySettings");
 
 	@Override
 	public void create () {
+		prefs = Gdx.app.getPreferences("MySettings");
+		if (!prefs.contains("highscore")) {
+			prefs.putInteger("highscore", 0);
+		}
+		prefs.flush();
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(0,0,1,1);

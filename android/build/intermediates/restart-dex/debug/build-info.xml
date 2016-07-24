@@ -4,24 +4,24 @@
     api-level="23"
     density="420dpi"
     format="7"
-    timestamp="16489273992262"
+    timestamp="21194872043281"
     token="8073558312203248829" >
 
     <task
         name="javac"
-        duration="257" />
+        duration="584" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="32" />
+        duration="61" />
     <task
         name="verifier"
-        duration="1" />
+        duration="14" />
 
     <artifact
-        location="/home/artem/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+        location="/home/artem/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex"
         type="DEX" />
 
     <build timestamp="184156065733" >
@@ -34,9 +34,14 @@
             location="/home/artem/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_8/classes.dex"
             type="DEX" />
     </build>
-    <build timestamp="16489273992262" >
+    <build timestamp="20672749599722" >
         <artifact
             location="/home/artem/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
+            type="DEX" />
+    </build>
+    <build timestamp="21194872043281" >
+        <artifact
+            location="/home/artem/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_3/classes.dex"
             type="DEX" />
     </build>
 

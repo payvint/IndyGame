@@ -29,11 +29,13 @@ public class PlayState extends State {
     private boolean isGameOn;
     private boolean getTouch;
     private int angle;
+    private int highscore;
     //touch control
     //Vector3 touchPos;
     float  cX, cY;
 
     BitmapFont score;
+    BitmapFont hScore;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -58,6 +60,8 @@ public class PlayState extends State {
         //touchPos = new Vector3();
 
         score = new BitmapFont();
+        hScore = new BitmapFont();
+        highscore = Indygame.prefs.getInteger("highscore");
     }
 
     @Override
@@ -125,7 +129,7 @@ public class PlayState extends State {
         PlatformPos();
         Scroll();
         point.update(dt);
-            if (point.getPosition().x <= 21)
+            if (point.getPosition().x <= 20)
             {
                 point.setCentralPosition();
                 platformLeft.setCentralPosition();
@@ -135,7 +139,7 @@ public class PlayState extends State {
                     point.lastCollibe = 3;
                 }
             }
-            if (point.getPosition().x >= Indygame.width - 21 - point.getPoint().getWidth())
+            if (point.getPosition().x >= Indygame.width - 20 - point.getPoint().getWidth())
             {
                 point.setCentralPosition();
                 platformRight.setCentralPosition();
@@ -145,7 +149,7 @@ public class PlayState extends State {
                     point.lastCollibe = 1;
                 }
             }
-            if (point.getPosition().y <=  Indygame.PosMin + 21)
+            if (point.getPosition().y <=  Indygame.PosMin + 20)
             {
                 point.setCentralPosition();
                 platformDown.setCentralPosition();
@@ -155,7 +159,7 @@ public class PlayState extends State {
                     point.lastCollibe = 2;
                 }
             }
-            if (point.getPosition().y >= Indygame.PosMax + platformUp.getPlatform().getHeight() - 21 - point.getPoint().getHeight())
+            if (point.getPosition().y >= Indygame.PosMax + platformUp.getPlatform().getHeight() - 20 - point.getPoint().getHeight())
             {
                 point.setCentralPosition();
                 platformUp.setCentralPosition();
@@ -168,6 +172,13 @@ public class PlayState extends State {
             }
         if (point.getPosition().x < 15 || point.getPosition().x > Indygame.width - point.getPoint().getWidth() - 15 || point.getPosition().y < Indygame.PosMin + 15 || point.getPosition().y > Indygame.PosMax + platformUp.getPlatform().getHeight() - point.getPoint().getHeight() - 15)
         {
+            highscore = Indygame.prefs.getInteger("highscore");
+            if (highscore < point.quantityBouncing)
+            {
+                highscore = point.quantityBouncing;
+                Indygame.prefs.putInteger("highscore", highscore);
+                Indygame.prefs.flush();
+            }
             gsm.set(new PlayState(gsm));
         }
         camera.update();
@@ -178,6 +189,7 @@ public class PlayState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
+        hScore.draw(sb, "Highscore: " + highscore, 20, Indygame.height - 30);
         score.draw(sb,"Score: " + point.quantityBouncing, 20, Indygame.height - 50);
         sb.draw(platformDown.getPlatform(), platformDown.getPosition().x, platformDown.getPosition().y);
         sb.draw(platformUp.getPlatform(), platformUp.getPosition().x, platformUp.getPosition().y);
