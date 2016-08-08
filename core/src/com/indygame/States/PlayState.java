@@ -30,8 +30,6 @@ public class PlayState extends State {
     private boolean getTouch;
     private int angle;
     private int highscore;
-    //touch control
-    //Vector3 touchPos;
     float  cX, cY;
 
     BitmapFont score;
@@ -57,7 +55,6 @@ public class PlayState extends State {
 
         cX = platformDown.getPosition().x - platformUp.getPosition().x;
         cY = platformLeft.getPosition().y - platformRight.getPosition().y;
-        //touchPos = new Vector3();
 
         score = new BitmapFont();
         hScore = new BitmapFont();
@@ -90,8 +87,7 @@ public class PlayState extends State {
             getTouch = false;
     }
 
-    protected void Scroll()
-    {
+    protected void Scroll() {
         platformDown.getPosition().x = touchPos.x + platformDown.savePos.x;
         platformUp.getPosition().x = platformDown.getPosition().x + cX;
         platformLeft.getPosition().y = touchPos.y + platformLeft.savePos.y;
@@ -116,11 +112,6 @@ public class PlayState extends State {
             platformDown.getPosition().x = platformDown.getPosition().x - Indygame.width + 80;
         else if(platformDown.getPosition().x < 0)
             platformDown.getPosition().x = Indygame.width + platformDown.getPosition().x - 80;
-
-        platformDown.rectangle.setPosition(platformDown.getPosition().x, platformDown.getPosition().y);
-        platformUp.rectangle.setPosition(platformUp.getPosition().x, platformUp.getPosition().y);
-        platformLeft.rectangle.setPosition(platformLeft.getPosition().x, platformLeft.getPosition().y);
-        platformRight.rectangle.setPosition(platformRight.getPosition().x, platformRight.getPosition().y);
     }
 
     @Override
@@ -129,47 +120,46 @@ public class PlayState extends State {
         PlatformPos();
         Scroll();
         point.update(dt);
-            if (point.getPosition().x <= 20)
-            {
-                point.setCentralPosition();
-                platformLeft.setCentralPosition();
-                if (point.collides(platformLeft) && point.lastCollibe != 3 && point.centralPosition.y <= platformLeft.centralPosition.y + 40 && point.centralPosition.y >= platformLeft.centralPosition.y - 40) {
-                    point.angleMirrorRotation(platformLeft.getAngle());
-                    point.quantityBouncing++;
-                    point.lastCollibe = 3;
-                }
+        if (point.getPosition().x <= 20)
+        {
+            point.setCentralPosition();
+            platformLeft.setCentralPosition();
+            if (point.collides(platformLeft) && point.lastCollide != 3 && point.centralPosition.y <= platformLeft.centralPosition.y + 41 && point.centralPosition.y >= platformLeft.centralPosition.y - 41) {
+                point.angleMirrorRotation(platformLeft.getAngle());
+                point.quantityBouncing++;
+                point.lastCollide = 3;
             }
-            if (point.getPosition().x >= Indygame.width - 20 - point.getPoint().getWidth())
-            {
-                point.setCentralPosition();
-                platformRight.setCentralPosition();
-                if (point.collides(platformRight) && point.lastCollibe != 1 && point.centralPosition.y <= platformRight.centralPosition.y + 40 && point.centralPosition.y >= platformRight.centralPosition.y - 40) {
-                    point.angleMirrorRotation(platformRight.getAngle());
-                    point.quantityBouncing++;
-                    point.lastCollibe = 1;
-                }
+        }
+        if (point.getPosition().x >= Indygame.width - 20 - point.getPoint().getWidth())
+        {
+            point.setCentralPosition();
+            platformRight.setCentralPosition();
+            if (point.collides(platformRight) && point.lastCollide != 1 && point.centralPosition.y <= platformRight.centralPosition.y + 41 && point.centralPosition.y >= platformRight.centralPosition.y - 41) {
+                point.angleMirrorRotation(platformRight.getAngle());
+                point.quantityBouncing++;
+                point.lastCollide = 1;
             }
-            if (point.getPosition().y <=  Indygame.PosMin + 20)
-            {
-                point.setCentralPosition();
-                platformDown.setCentralPosition();
-                if (point.collides(platformDown) && point.lastCollibe != 2 && point.centralPosition.x <= platformDown.centralPosition.x + 40 && point.centralPosition.x >= platformDown.centralPosition.x - 40) {
-                    point.angleMirrorRotation(platformDown.getAngle());
-                    point.quantityBouncing++;
-                    point.lastCollibe = 2;
-                }
+        }
+        if (point.getPosition().y <=  Indygame.PosMin + 20)
+        {
+            point.setCentralPosition();
+            platformDown.setCentralPosition();
+            if (point.collides(platformDown) && point.lastCollide != 2 && point.centralPosition.x <= platformDown.centralPosition.x + 41 && point.centralPosition.x >= platformDown.centralPosition.x - 41) {
+                point.angleMirrorRotation(platformDown.getAngle());
+                point.quantityBouncing++;
+                point.lastCollide = 2;
             }
-            if (point.getPosition().y >= Indygame.PosMax + platformUp.getPlatform().getHeight() - 20 - point.getPoint().getHeight())
-            {
-                point.setCentralPosition();
-                platformUp.setCentralPosition();
-                if (point.collides(platformUp) && point.lastCollibe != 4 && point.centralPosition.x <= platformUp.centralPosition.x + 40 && point.centralPosition.x >= platformUp.centralPosition.x - 40)
-                {
-                    point.angleMirrorRotation(platformUp.getAngle());
-                    point.quantityBouncing++;
-                    point.lastCollibe = 4;
-                }
+        }
+        if (point.getPosition().y >= Indygame.PosMax + platformUp.getPlatform().getHeight() - 20 - point.getPoint().getHeight())
+        {
+            point.setCentralPosition();
+            platformUp.setCentralPosition();
+            if (point.collides(platformUp) && point.lastCollide != 4 && point.centralPosition.x <= platformUp.centralPosition.x + 41 && point.centralPosition.x >= platformUp.centralPosition.x - 41) {
+                point.angleMirrorRotation(platformUp.getAngle());
+                point.quantityBouncing++;
+                point.lastCollide = 4;
             }
+        }
         if (point.getPosition().x < 15 || point.getPosition().x > Indygame.width - point.getPoint().getWidth() - 15 || point.getPosition().y < Indygame.PosMin + 15 || point.getPosition().y > Indygame.PosMax + platformUp.getPlatform().getHeight() - point.getPoint().getHeight() - 15)
         {
             gsm.set(new PlayState(gsm));
@@ -188,7 +178,7 @@ public class PlayState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
-        hScore.draw(sb, "Highscore: " + highscore, 20, Indygame.height - 30);
+        hScore.draw(sb, "Highscore: " + highscore, Indygame.width - 20 - 90, Indygame.height - 50);
         score.draw(sb,"Score: " + point.quantityBouncing, 20, Indygame.height - 50);
         sb.draw(platformDown.getPlatform(), platformDown.getPosition().x, platformDown.getPosition().y);
         sb.draw(platformUp.getPlatform(), platformUp.getPosition().x, platformUp.getPosition().y);
@@ -196,14 +186,13 @@ public class PlayState extends State {
         sb.draw(platformRight.getPlatform(), platformRight.getPosition().x, platformRight.getPosition().y);
 
         if (!isGameOn) {
-            sb.draw(finger, Indygame.width / 2, Indygame.PosMin / 2);
+            sb.draw(finger, Indygame.width / 2 - 50, Indygame.PosMin / 2 - 50);
         }
         else
         {
             sb.draw(point.getPoint(), point.getPosition().x, point.getPosition().y);
         }
         sb.end();
-
     }
 
     @Override
