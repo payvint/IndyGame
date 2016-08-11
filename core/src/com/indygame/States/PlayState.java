@@ -44,10 +44,10 @@ public class PlayState extends State {
         camera.setToOrtho(false, Indygame.width, Indygame.height);
         background = new Texture("bCol.png");
 
-        platformDown = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMin, new Texture("platformHD.png"), 90);
-        platformUp = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMax , new Texture("platformHU.png"), 270);
-        platformLeft = new Platform(0, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVL.png"), 0);
-        platformRight = new Platform(Indygame.width - 10 - 20 / 2, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVR.png"), 180);
+        platformDown = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMin + 5, new Texture("platformHD.png"), 90);
+        platformUp = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMax - 20 - 5, new Texture("platformHU.png"), 270);
+        platformLeft = new Platform(5, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVL.png"), 0);
+        platformRight = new Platform(Indygame.width - 10 - 5 - 20 / 2, MathUtils.random(Indygame.width - 80 / 2) + Indygame.PosMin, new Texture("platformVR.png"), 180);
 
         frame = new Texture("frame.png");
         finger = new Texture("finger.png");
@@ -93,15 +93,15 @@ public class PlayState extends State {
         platformLeft.getPosition().y = touchPos.y + platformLeft.savePos.y;
         platformRight.getPosition().y = platformLeft.getPosition().y + cY;
 
-        if(platformRight.getPosition().y > Indygame.PosMax - 60)
-            platformRight.getPosition().y = Indygame.PosMin + (platformRight.getPosition().y - Indygame.PosMax + 60);
+        if(platformRight.getPosition().y > Indygame.PosMax - 80)
+            platformRight.getPosition().y = Indygame.PosMin + (platformRight.getPosition().y - Indygame.PosMax + 80);
         else if(platformRight.getPosition().y < Indygame.PosMin)
-            platformRight.getPosition().y = Indygame.PosMax - (Indygame.PosMin - platformRight.getPosition().y) - 60;
+            platformRight.getPosition().y = Indygame.PosMax - (Indygame.PosMin - platformRight.getPosition().y) - 80;
 
-        if(platformLeft.getPosition().y > Indygame.PosMax - 60)
-            platformLeft.getPosition().y = Indygame.PosMin + (platformLeft.getPosition().y - Indygame.PosMax + 60);
+        if(platformLeft.getPosition().y > Indygame.PosMax - 80)
+            platformLeft.getPosition().y = Indygame.PosMin + (platformLeft.getPosition().y - Indygame.PosMax + 80);
         else if(platformLeft.getPosition().y < Indygame.PosMin)
-            platformLeft.getPosition().y = Indygame.PosMax - (Indygame.PosMin - platformLeft.getPosition().y) - 60;
+            platformLeft.getPosition().y = Indygame.PosMax - (Indygame.PosMin - platformLeft.getPosition().y) - 80;
 
         if(platformUp.getPosition().x > Indygame.width - 80)
             platformUp.getPosition().x = platformUp.getPosition().x - Indygame.width + 80;
@@ -120,7 +120,7 @@ public class PlayState extends State {
         PlatformPos();
         Scroll();
         point.update(dt);
-        if (point.getPosition().x <= 20)
+        if (point.getPosition().x <= platformLeft.getPlatform().getWidth() + platformLeft.getPosition().x)
         {
             point.setCentralPosition();
             platformLeft.setCentralPosition();
@@ -130,7 +130,7 @@ public class PlayState extends State {
                 point.lastCollide = 3;
             }
         }
-        if (point.getPosition().x >= Indygame.width - 20 - point.getPoint().getWidth())
+        if (point.getPosition().x >= platformRight.getPosition().x - point.getPoint().getWidth())
         {
             point.setCentralPosition();
             platformRight.setCentralPosition();
@@ -140,7 +140,7 @@ public class PlayState extends State {
                 point.lastCollide = 1;
             }
         }
-        if (point.getPosition().y <=  Indygame.PosMin + 20)
+        if (point.getPosition().y <=  platformDown.getPosition().y + platformDown.getPlatform().getHeight())
         {
             point.setCentralPosition();
             platformDown.setCentralPosition();
@@ -150,7 +150,7 @@ public class PlayState extends State {
                 point.lastCollide = 2;
             }
         }
-        if (point.getPosition().y >= Indygame.PosMax + platformUp.getPlatform().getHeight() - 20 - point.getPoint().getHeight())
+        if (point.getPosition().y >= platformUp.getPosition().y - point.getPoint().getHeight())
         {
             point.setCentralPosition();
             platformUp.setCentralPosition();
@@ -160,7 +160,7 @@ public class PlayState extends State {
                 point.lastCollide = 4;
             }
         }
-        if (point.getPosition().x < 15 || point.getPosition().x > Indygame.width - point.getPoint().getWidth() - 15 || point.getPosition().y < Indygame.PosMin + 15 || point.getPosition().y > Indygame.PosMax + platformUp.getPlatform().getHeight() - point.getPoint().getHeight() - 15)
+        if (point.getPosition().x < 15 || point.getPosition().x > Indygame.width - point.getPoint().getWidth() - 15 || point.getPosition().y < Indygame.PosMin + 15 || point.getPosition().y > Indygame.PosMax - point.getPoint().getHeight() - 15)
         {
             gsm.set(new PlayState(gsm));
         }
@@ -180,10 +180,12 @@ public class PlayState extends State {
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
         hScore.draw(sb, "Highscore: " + highscore, Indygame.width - 20 - 90, Indygame.height - 50);
         score.draw(sb,"Score: " + point.quantityBouncing, 20, Indygame.height - 50);
+        sb.draw(frame,-1,Indygame.PosMin);
         sb.draw(platformDown.getPlatform(), platformDown.getPosition().x, platformDown.getPosition().y);
         sb.draw(platformUp.getPlatform(), platformUp.getPosition().x, platformUp.getPosition().y);
         sb.draw(platformLeft.getPlatform(), platformLeft.getPosition().x, platformLeft.getPosition().y);
         sb.draw(platformRight.getPlatform(), platformRight.getPosition().x, platformRight.getPosition().y);
+
 
         if (!isGameOn) {
             sb.draw(finger, Indygame.width / 2 - 50, Indygame.PosMin / 2 - 50);

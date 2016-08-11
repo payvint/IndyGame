@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
-    abi="armeabi-v7a,armeabi"
-    api-level="19"
-    density="xhdpi"
+    abi="arm64-v8a,armeabi-v7a,armeabi"
+    api-level="22"
+    density="xxhdpi"
     format="7"
-    timestamp="39279922735992"
-    token="8073558312203248829" >
+    timestamp="29295267429955"
+    token="-5111490886606459367" >
 
     <task
         name="javac"
-        duration="727" />
+        duration="39" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="155" />
+        duration="31" />
     <task
         name="verifier"
-        duration="4" />
+        duration="2" />
 
     <artifact
-        location="/home/artem/IndyGame/android/build/outputs/apk/android-debug.apk"
+        location="/home/pinkpony008/IndyGame/android/build/outputs/apk/android-debug.apk"
         type="MAIN" />
 
-    <build timestamp="39279922735992" >
+    <build timestamp="29295267429955" >
         <artifact
-            location="/home/artem/IndyGame/android/build/outputs/apk/android-debug.apk"
+            location="/home/pinkpony008/IndyGame/android/build/outputs/apk/android-debug.apk"
             type="MAIN" />
     </build>
 
