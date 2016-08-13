@@ -13,9 +13,6 @@ import com.indygame.Objects.Point;
 
 import javafx.scene.text.Text;
 
-/**
- * Created by artem on 06.07.16.
- */
 public class PlayState extends State {
 
     private Point point;
@@ -26,8 +23,10 @@ public class PlayState extends State {
     private Platform platformLeft;
     private Texture frame;
     private Texture finger;
+    public Texture fScreen;
     private boolean isGameOn;
     private boolean getTouch;
+    private boolean isGameOver = false;
     private int angle;
     private int highscore;
     float  cX, cY;
@@ -51,6 +50,7 @@ public class PlayState extends State {
 
         frame = new Texture("frame.png");
         finger = new Texture("finger.png");
+        fScreen = new Texture("finalScreen1.png");
         isGameOn = false;
 
         cX = platformDown.getPosition().x - platformUp.getPosition().x;
@@ -63,7 +63,7 @@ public class PlayState extends State {
 
     @Override
     protected void handleInput() {
-        if (Gdx.input.justTouched())
+        if (Gdx.input.justTouched() && isGameOver == false)
         {
             isGameOn = true;
             point.isGameOn = true;
@@ -162,7 +162,9 @@ public class PlayState extends State {
         }
         if (point.getPosition().x < 15 || point.getPosition().x > Indygame.width - point.getPoint().getWidth() - 15 || point.getPosition().y < Indygame.PosMin + 15 || point.getPosition().y > Indygame.PosMax - point.getPoint().getHeight() - 15)
         {
-            gsm.set(new PlayState(gsm));
+            isGameOn = false;
+            isGameOver = true;
+            //gsm.set(new PlayState(gsm));
         }
         if (highscore < point.quantityBouncing)
         {
@@ -186,9 +188,17 @@ public class PlayState extends State {
         sb.draw(platformLeft.getPlatform(), platformLeft.getPosition().x, platformLeft.getPosition().y);
         sb.draw(platformRight.getPlatform(), platformRight.getPosition().x, platformRight.getPosition().y);
 
-
         if (!isGameOn) {
-            sb.draw(finger, Indygame.width / 2 - 50, Indygame.PosMin / 2 - 50);
+            if(isGameOver) {
+                sb.draw(fScreen, 40, 240);
+                score.draw(sb, "Score: " + point.quantityBouncing, Indygame.width / 2 - 40, Indygame.height / 2 + 40);
+            }
+            if(Gdx.input.justTouched() && isGameOver == true) {
+                isGameOver = false;
+                gsm.set(new PlayState(gsm));
+                //sb.draw(finger, Indygame.width / 2 - 50, Indygame.height / 2 - 50);
+            }
+
         }
         else
         {
