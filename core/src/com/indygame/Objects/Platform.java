@@ -41,16 +41,13 @@ public class Platform {
 
     public void setCentralPosition() {
         double beta;
-        if (angle > 0 && angle <= 90)
-        {
+        if (angle > 0 && angle <= 90) {
             beta = ((this.angle - Math.atan(4)) + MathUtils.PI * 4) % (MathUtils.PI * 2);
-        }
-        else
-        {
+        } else {
             beta = ((Math.atan(4) - this.angle) + MathUtils.PI * 4) % (MathUtils.PI * 2);
         }
         double diagonal = Math.sqrt(platform.getWidth() * platform.getWidth() + platform.getHeight() * platform.getHeight());
-        centralPosition = new Vector2(position.x + (float)(Math.cos(beta) * (diagonal / 2.0)), position.y + (float)(Math.sin(beta) * (diagonal / 2.0)));
+        centralPosition = new Vector2(position.x + (float) (Math.cos(beta) * (diagonal / 2.0)), position.y + (float) (Math.sin(beta) * (diagonal / 2.0)));
     }
 
 }

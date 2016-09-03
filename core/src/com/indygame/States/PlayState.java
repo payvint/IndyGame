@@ -23,6 +23,7 @@ public class PlayState extends State {
     private Platform platformLeft;
     private Texture frame;
     private Texture finger;
+    private Texture menu;
     public Texture fScreen;
     private boolean isGameOn;
     private boolean getTouch;
@@ -42,6 +43,7 @@ public class PlayState extends State {
         point = new Point(Indygame.width / 2 - 35, (int) ((Indygame.PosMax + Indygame.PosMin) / 2 - 35), angle);
         camera.setToOrtho(false, Indygame.width, Indygame.height);
         background = new Texture("bCol.png");
+        menu = new Texture("Menu.jpg");
 
         platformDown = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMin + 5, new Texture("platformHD.png"), 90);
         platformUp = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMax - 20 - 5, new Texture("platformHU.png"), 270);
@@ -65,6 +67,12 @@ public class PlayState extends State {
     protected void handleInput() {
         if (Gdx.input.justTouched() && isGameOver == false)
         {
+            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(touchPos);
+            if (touchPos.x >= Indygame.width - 110 && touchPos.x <= Indygame.width - 10 && touchPos.y >= 10 && touchPos.y <= 110)
+            {
+                gsm.set(new MenuState(gsm));
+            }
             isGameOn = true;
             point.isGameOn = true;
         }
@@ -188,17 +196,22 @@ public class PlayState extends State {
         sb.draw(platformLeft.getPlatform(), platformLeft.getPosition().x, platformLeft.getPosition().y);
         sb.draw(platformRight.getPlatform(), platformRight.getPosition().x, platformRight.getPosition().y);
 
-        if (!isGameOn) {
-            if(isGameOver) {
+        if (!isGameOn)
+        {
+            if(isGameOver)
+            {
                 sb.draw(fScreen, 40, 240);
                 score.draw(sb, "Score: " + point.quantityBouncing, Indygame.width / 2 - 40, Indygame.height / 2 + 40);
             }
-            if(Gdx.input.justTouched() && isGameOver == true) {
+            else
+            {
+                sb.draw(menu,   Indygame.width - 110, 10);
+            }
+            if(Gdx.input.justTouched() && isGameOver == true)
+            {
                 isGameOver = false;
                 gsm.set(new PlayState(gsm));
-                //sb.draw(finger, Indygame.width / 2 - 50, Indygame.height / 2 - 50);
             }
-
         }
         else
         {

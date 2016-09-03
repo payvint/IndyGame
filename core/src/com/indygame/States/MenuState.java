@@ -35,7 +35,7 @@ public class MenuState extends State {
         {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
-            if(touchPos.x > (Indygame.width / 2) - (Start.getWidth() / 2) && touchPos.x < (Indygame.width / 2) + (Start.getWidth() / 2) && touchPos.y > Indygame.height / 8 && touchPos.y < Indygame.height / 8 + Start.getHeight())
+            if(touchPos.x > (Indygame.width / 2) - (Start.getWidth() / 2) && touchPos.x < (Indygame.width / 2) + (Start.getWidth() / 2) && touchPos.y > Indygame.height / 4 * 3 && touchPos.y < Indygame.height / 4 * 3 + Start.getHeight())
             {
                 gsm.set(new PlayState(gsm));
             }
@@ -55,15 +55,15 @@ public class MenuState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
-        sb.draw(Help, (Indygame.width/ 2) - (Help.getWidth() / 2), Indygame.height / 4);
-        sb.draw(Achiv, (Indygame.width / 2) - (Achiv.getWidth() / 2), Indygame.height / 8 * 5);
-        sb.draw(AU, (Indygame.width / 2) - (AU.getWidth() / 2), Indygame.height / 8 *7);
-        sb.draw(Rec, (Indygame.width / 2) - (Rec.getWidth() / 2), Indygame.height / 8 *3);
-        sb.draw(Res, (Indygame.width / 2) - (Res.getWidth() / 2), Indygame.height / 2);
-        sb.draw(Stats, (Indygame.width / 2) - (Stats.getWidth() / 2), Indygame.height / 4 * 3);
-        sb.draw(Start, (Indygame.width / 2) - (Start.getWidth() / 2), Indygame.height / 8);
+        sb.draw(Start, (Indygame.width / 2) - (Start.getWidth() / 2), Indygame.height / 4 * 3);
+        //sb.draw(Help, (Indygame.width/ 2) - (Help.getWidth() / 2), Indygame.height / 4);
+        //sb.draw(Achiv, (Indygame.width / 2) - (Achiv.getWidth() / 2), Indygame.height / 8 * 5);
+        //sb.draw(AU, (Indygame.width / 2) - (AU.getWidth() / 2), Indygame.height / 8 *7);
+        //sb.draw(Res, (Indygame.width / 2) - (Res.getWidth() / 2), Indygame.height / 2);
+        //sb.draw(Stats, (Indygame.width / 2) - (Stats.getWidth() / 2), Indygame.height / 4 * 3);
+        sb.draw(Rec, (Indygame.width / 2) - (Rec.getWidth() / 2), Indygame.height / 4);
+        sb.draw(AU, (Indygame.width / 2) - (Start.getWidth() / 2), Indygame.height / 8);
         sb.end();
-
     }
 
     @Override

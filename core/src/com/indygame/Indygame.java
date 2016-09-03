@@ -45,8 +45,8 @@ public class Indygame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(0,0,1,1);
-		//gsm.push(new PlayState(gsm));
-		gsm.push(new MenuState(gsm));
+		gsm.push(new PlayState(gsm));
+		//gsm.push(new MenuState(gsm));
 	}
 
 	@Override
