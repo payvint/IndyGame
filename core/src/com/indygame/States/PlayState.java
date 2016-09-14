@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.indygame.Indygame;
 import com.indygame.Objects.Platform;
 import com.indygame.Objects.Point;
 
-import javafx.scene.text.Text;
+//import javafx.scene.text.Text;
 
 public class PlayState extends State {
 
@@ -23,6 +25,7 @@ public class PlayState extends State {
     private Platform platformLeft;
     private Texture frame;
     private Texture finger;
+    private Texture finalB;
     private Texture menu;
     public Texture fScreen;
     private boolean isGameOn;
@@ -43,7 +46,7 @@ public class PlayState extends State {
         point = new Point(Indygame.width / 2 - 35, (int) ((Indygame.PosMax + Indygame.PosMin) / 2 - 35), angle);
         camera.setToOrtho(false, Indygame.width, Indygame.height);
         background = new Texture("bCol.png");
-        menu = new Texture("Menu.jpg");
+        menu = new Texture("Menu.png");
 
         platformDown = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMin + 5, new Texture("platformHD.png"), 90);
         platformUp = new Platform(MathUtils.random(Indygame.width - 80 / 2), Indygame.PosMax - 20 - 5, new Texture("platformHU.png"), 270);
@@ -52,7 +55,8 @@ public class PlayState extends State {
 
         frame = new Texture("frame.png");
         finger = new Texture("finger.png");
-        fScreen = new Texture("finalScreen1.png");
+        fScreen = new Texture("finalScreen.png");
+        finalB = new Texture("finalB.png");
         isGameOn = false;
 
         cX = platformDown.getPosition().x - platformUp.getPosition().x;
@@ -65,6 +69,18 @@ public class PlayState extends State {
 
     @Override
     protected void handleInput() {
+        if(Gdx.input.justTouched() && isGameOver == true)
+        {
+            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(touchPos);
+            if (touchPos.x > Indygame.width + 40 && touchPos.x < Indygame.width/2 - 10 && touchPos.y > Indygame.height/2 - 140 && touchPos.y < Indygame.height/2 + 140)
+            {
+                isGameOver = false;
+                gsm.set(new PlayState(gsm));
+                isGameOn = true;
+                point.isGameOn = true;
+            }
+        }
         if (Gdx.input.justTouched() && isGameOver == false)
         {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -76,6 +92,16 @@ public class PlayState extends State {
             isGameOn = true;
             point.isGameOn = true;
         }
+        if(Gdx.input.justTouched() && isGameOver == true)
+        {
+            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(touchPos);
+            if (touchPos.x > Indygame.width/2 + 10 && touchPos.x < Indygame.width - 40 && touchPos.y > Indygame.height/2 - 140 && touchPos.y < Indygame.height/2 + 140)
+            {
+                gsm.set(new MenuState(gsm));
+            }
+        }
+
     }
 
     protected void PlatformPos()
@@ -200,8 +226,9 @@ public class PlayState extends State {
         {
             if(isGameOver)
             {
-                sb.draw(fScreen, 40, 240);
-                score.draw(sb, "Score: " + point.quantityBouncing, Indygame.width / 2 - 40, Indygame.height / 2 + 40);
+                sb.draw(finalB,0, 0, Indygame.width, Indygame.height);
+                sb.draw(fScreen, 40, 260);
+                score.draw(sb, "Score: " + point.quantityBouncing, Indygame.width / 2 - 40, Indygame.height / 2 + 150);
             }
             else
             {
