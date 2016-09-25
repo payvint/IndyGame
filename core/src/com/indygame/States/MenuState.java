@@ -19,14 +19,14 @@ public class MenuState extends State {
     public MenuState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, Indygame.width, Indygame.height);
-        background = new Texture("bCol.png");
+        background = new Texture("blueScreen.png");
         Help = new Texture("Help.jpg");
         Achiv = new Texture("Achievements.jpg");
-        AU = new Texture("AboutUs.jpg");
-        Rec = new Texture("Record.jpg");
+        AU = new Texture("AU.png");
+        Rec = new Texture("rec.png");
         Res = new Texture("Reset.jpg");
         Stats = new Texture("Statistics.jpg");
-        Start = new Texture("Start.jpg");
+        Start = new Texture("start.png");
     }
 
     @Override
@@ -40,8 +40,6 @@ public class MenuState extends State {
                 gsm.set(new PlayState(gsm));
             }
         }
-
-
     }
 
     @Override
@@ -61,8 +59,8 @@ public class MenuState extends State {
         //sb.draw(AU, (Indygame.width / 2) - (AU.getWidth() / 2), Indygame.height / 8 *7);
         //sb.draw(Res, (Indygame.width / 2) - (Res.getWidth() / 2), Indygame.height / 2);
         //sb.draw(Stats, (Indygame.width / 2) - (Stats.getWidth() / 2), Indygame.height / 4 * 3);
-        sb.draw(Rec, (Indygame.width / 2) - (Rec.getWidth() / 2), Indygame.height / 4);
-        sb.draw(AU, (Indygame.width / 2) - (Start.getWidth() / 2), Indygame.height / 8);
+        sb.draw(Rec, (Indygame.width / 2) - (Rec.getWidth() / 2), Indygame.height / 4*2);
+        sb.draw(AU, (Indygame.width / 2) - (Start.getWidth() / 2), 0);
         sb.end();
     }
 

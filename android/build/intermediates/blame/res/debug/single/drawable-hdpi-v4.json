@@ -6,9 +6,5 @@
     {
         "merged": "/home/pinkpony008/IndyGame/android/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher1.png",
         "source": "/home/pinkpony008/IndyGame/android/res/drawable-hdpi/ic_launcher1.png"
-    },
-    {
-        "merged": "/home/artem/IndyGame/android/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_launcher.png",
-        "source": "/home/artem/IndyGame/android/res/drawable-hdpi/ic_launcher.png"
     }
 ]
