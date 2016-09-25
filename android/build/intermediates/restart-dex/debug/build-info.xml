@@ -4,19 +4,19 @@
     api-level="23"
     density="xhdpi"
     format="7"
-    timestamp="114410668152218"
+    timestamp="125608521792549"
     token="-5111490886606459367"
     verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="73" />
+        duration="38" />
     <task
         name="instant-run-dex"
-        duration="502" />
+        duration="825" />
     <task
         name="instant-run-transform"
-        duration="7" />
+        duration="8" />
     <task
         name="verifier"
         duration="1" />
@@ -25,23 +25,18 @@
         location="/home/pinkpony008/IndyGame/android/build/intermediates/reload-dex/debug/classes.dex"
         type="RELOAD_DEX" />
 
-    <build timestamp="113557854719982" >
+    <build timestamp="124319668858867" >
         <artifact
             location="/home/pinkpony008/IndyGame/android/build/outputs/apk/android-debug.apk"
             type="MAIN" />
     </build>
-    <build timestamp="114261900926753" >
-        <artifact
-            location="/home/pinkpony008/IndyGame/android/build/intermediates/res/resources-debug.ap_"
-            type="RESOURCES" />
-    </build>
-    <build timestamp="114376525640368" >
+    <build timestamp="125583272098617" >
         <artifact
             location="/home/pinkpony008/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/5/slice_4/classes.dex"
             type="DEX" />
     </build>
     <build
-        timestamp="114410668152218"
+        timestamp="125608521792549"
         verifier="COMPATIBLE" >
         <artifact
             location="/home/pinkpony008/IndyGame/android/build/intermediates/reload-dex/debug/classes.dex"

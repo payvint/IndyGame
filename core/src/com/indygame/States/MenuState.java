@@ -2,6 +2,7 @@ package com.indygame.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.indygame.Indygame;
@@ -16,6 +17,9 @@ public class MenuState extends State {
     private Texture Stats;
     private Texture Start;
     private Texture Res;
+    private boolean AUs;
+    private Texture Menu;
+    private BitmapFont AboutUs;
     public MenuState(GameStateManager gsm) {
         super(gsm);
         camera.setToOrtho(false, Indygame.width, Indygame.height);
@@ -27,6 +31,9 @@ public class MenuState extends State {
         Res = new Texture("Reset.jpg");
         Stats = new Texture("Statistics.jpg");
         Start = new Texture("start.png");
+        Menu = new Texture("Menu.png");
+        AUs = false;
+        AboutUs = new BitmapFont();
     }
 
     @Override
@@ -38,6 +45,14 @@ public class MenuState extends State {
             if(touchPos.x > (Indygame.width / 2) - (Start.getWidth() / 2) && touchPos.x < (Indygame.width / 2) + (Start.getWidth() / 2) && touchPos.y > Indygame.height / 4 * 3 && touchPos.y < Indygame.height / 4 * 3 + Start.getHeight())
             {
                 gsm.set(new PlayState(gsm));
+            }
+            if(touchPos.y <= 150 && AUs == false)
+            {
+                AUs = true;
+            }
+            if(AUs == true && touchPos.y >= 20 && touchPos.y <= 120 && touchPos.x >= 20 && touchPos.x <= 120)
+            {
+                AUs = false;
             }
         }
     }
@@ -53,14 +68,16 @@ public class MenuState extends State {
         sb.setProjectionMatrix(camera.combined);
         sb.begin();
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
-        sb.draw(Start, (Indygame.width / 2) - (Start.getWidth() / 2), Indygame.height / 4 * 3);
-        //sb.draw(Help, (Indygame.width/ 2) - (Help.getWidth() / 2), Indygame.height / 4);
-        //sb.draw(Achiv, (Indygame.width / 2) - (Achiv.getWidth() / 2), Indygame.height / 8 * 5);
-        //sb.draw(AU, (Indygame.width / 2) - (AU.getWidth() / 2), Indygame.height / 8 *7);
-        //sb.draw(Res, (Indygame.width / 2) - (Res.getWidth() / 2), Indygame.height / 2);
-        //sb.draw(Stats, (Indygame.width / 2) - (Stats.getWidth() / 2), Indygame.height / 4 * 3);
-        sb.draw(Rec, (Indygame.width / 2) - (Rec.getWidth() / 2), Indygame.height / 4*2);
-        sb.draw(AU, (Indygame.width / 2) - (Start.getWidth() / 2), 0);
+        if(AUs == false){
+            sb.draw(Start, (Indygame.width / 2) - (Start.getWidth() / 2), Indygame.height / 4 * 3);
+            sb.draw(Rec, (Indygame.width / 2) - (Rec.getWidth() / 2), Indygame.height / 4*2);
+            sb.draw(AU, (Indygame.width / 2) - (Start.getWidth() / 2), 0);
+        }
+        else if(AUs == true){
+            sb.draw(Menu, 20, 20);
+            AboutUs.draw(sb, "Created by: \nArtem(Asterix) Payvin\nDanylo(Pinkpony008) Lamanov",5,400);
+        }
+
         sb.end();
     }
 
