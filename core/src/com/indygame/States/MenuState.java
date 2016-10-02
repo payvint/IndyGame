@@ -42,15 +42,15 @@ public class MenuState extends State {
         {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
-            if(touchPos.x > (Indygame.width / 2) - (Start.getWidth() / 2) && touchPos.x < (Indygame.width / 2) + (Start.getWidth() / 2) && touchPos.y > Indygame.height / 4 * 3 && touchPos.y < Indygame.height / 4 * 3 + Start.getHeight())
+            if(touchPos.y > Indygame.height - 100 && touchPos.y < Indygame.height)
             {
                 gsm.set(new PlayState(gsm));
             }
-            if(touchPos.y <= 150 && AUs == false)
+            if(touchPos.y <= 100 && AUs == false)
             {
                 AUs = true;
             }
-            if(AUs == true && touchPos.y >= 20 && touchPos.y <= 120 && touchPos.x >= 20 && touchPos.x <= 120)
+            else if(AUs == true && (touchPos.y >= 20 && touchPos.y <= 120 && touchPos.x >= 20 && touchPos.x <= 120))
             {
                 AUs = false;
             }
@@ -69,13 +69,13 @@ public class MenuState extends State {
         sb.begin();
         sb.draw(background, 0, 0, Indygame.width, Indygame.height);
         if(AUs == false){
-            sb.draw(Start, (Indygame.width / 2) - (Start.getWidth() / 2), Indygame.height / 4 * 3);
-            sb.draw(Rec, (Indygame.width / 2) - (Rec.getWidth() / 2), Indygame.height / 4*2);
-            sb.draw(AU, (Indygame.width / 2) - (Start.getWidth() / 2), 0);
+            sb.draw(Start, 0, Indygame.height - 100);
+            sb.draw(Rec, 0, Indygame.height - 200);
+            sb.draw(AU, 0, 0);
         }
         else if(AUs == true){
             sb.draw(Menu, 20, 20);
-            AboutUs.draw(sb, "Created by: \nArtem(Asterix) Payvin\nDanylo(Pinkpony008) Lamanov",5,400);
+            AboutUs.draw(sb, "Created by: \nArtem(Asterisk) Payvin\nDanylo(Pinkpony008) Lamanov",5,400);
         }
 
         sb.end();
