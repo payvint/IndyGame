@@ -13,7 +13,7 @@ import com.indygame.Objects.Point;
 
 public class PlayState extends State {
 
-    private Point point;
+    public Point point;
     private Texture background;
     private Platform platformUp;
     private Platform platformDown;
@@ -24,12 +24,11 @@ public class PlayState extends State {
     private Texture finalB;
     private Texture menu;
     private Texture fScreen;
-    private boolean isGameOn;
+    public boolean isGameOver = false;
+    public boolean isGamePause = false;
     private boolean getTouch;
-    private boolean isGameOver = false;
     private int angle;
     private int highscore;
-    private float  cX, cY;
 
     BitmapFont score;
     BitmapFont hScore;
@@ -53,10 +52,6 @@ public class PlayState extends State {
         //finger = new Texture("finger.png");
         fScreen = new Texture("finalScreen.png");
         finalB = new Texture("finalB.png");
-        isGameOn = false;
-
-        cX = platformDown.getPosition().x - platformUp.getPosition().x;
-        cY = platformLeft.getPosition().y - platformRight.getPosition().y;
 
         score = new BitmapFont();
         hScore = new BitmapFont();
@@ -65,30 +60,29 @@ public class PlayState extends State {
 
     @Override
     protected void handleInput() {
-        if(Gdx.input.justTouched() && isGameOver == true)
+        if (Gdx.input.justTouched() && !isGameOver)
         {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
-            if (touchPos.x > Indygame.width + 40 && touchPos.x < Indygame.width/2 - 10 && touchPos.y > Indygame.height/2 - 140 && touchPos.y < Indygame.height/2 + 140)
+            if (touchPos.x >= Indygame.width - 110 && touchPos.x <= Indygame.width - 10 && touchPos.y >= 10 && touchPos.y <= 110)
             {
-                isGameOver = false;
-                gsm.set(new PlayState(gsm));
-                isGameOn = true;
-                point.isGameOn = true;
+                if (Indygame.isGameOn) {
+                    Indygame.isGameOn = false;
+                    isGamePause = true;
+                }
+                else {
+                    if (!isGamePause)
+                        gsm.set(new MenuState(gsm));
+                    else{
+                        isGamePause = false;
+                        Indygame.isGameOn = true;
+                    }
+                }
             }
+            if (!isGamePause)
+                Indygame.isGameOn = true;
         }
-        if (Gdx.input.justTouched() && isGameOver == false)
-        {
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
-            if (touchPos.x >= Indygame.width - 110 && touchPos.x <= Indygame.width - 10 && touchPos.y >= 10 && touchPos.y <= 110 && !isGameOn)
-            {
-                gsm.set(new MenuState(gsm));
-            }
-            isGameOn = true;
-            point.isGameOn = true;
-        }
-        if(Gdx.input.justTouched() && isGameOver == true)
+        if(Gdx.input.justTouched() && isGameOver)
         {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
@@ -96,13 +90,19 @@ public class PlayState extends State {
             {
                 gsm.set(new MenuState(gsm));
             }
+            else if (touchPos.x > 40 && touchPos.x < Indygame.width/2 - 10 && touchPos.y > Indygame.height/2 - 140 && touchPos.y < Indygame.height/2 + 140)
+            {
+                isGameOver = false;
+                gsm.set(new PlayState(gsm));
+                Indygame.isGameOn = true;
+            }
         }
 
     }
 
-    protected void PlatformPos()
+    private void PlatformPos()
     {
-        if(Gdx.input.isTouched() && isGameOn)
+        if(Gdx.input.isTouched() && Indygame.isGameOn)
         {
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPos);
@@ -129,8 +129,7 @@ public class PlayState extends State {
 
         if (point.getPosition().x < 15 || point.getPosition().x > Indygame.width - point.getPoint().getWidth() - 15 || point.getPosition().y < Indygame.PosMin + 15 || point.getPosition().y > Indygame.PosMax - point.getPoint().getHeight() - 15)
         {
-            isGameOn = false;
-            point.isGameOn = false;
+            Indygame.isGameOn = false;
             isGameOver = true;
             //gsm.set(new PlayState(gsm));
         }
@@ -166,7 +165,7 @@ public class PlayState extends State {
         hScore.draw(sb, "Highscore: " + highscore, Indygame.width - 20 - 90, Indygame.height - 50);
         score.draw(sb,"Score: " + point.quantityBouncing, 20, Indygame.height - 50);
 
-        if (!isGameOn)
+        if (!Indygame.isGameOn)
         {
             if(isGameOver)
             {
@@ -177,12 +176,12 @@ public class PlayState extends State {
             }
             else
             {
-                sb.draw(menu,   Indygame.width - 110, 10);
-            }
-            if(Gdx.input.justTouched() && isGameOver == true)
-            {
-                isGameOver = false;
-                gsm.set(new PlayState(gsm));
+                if (!isGamePause)
+                    sb.draw(menu,   Indygame.width - 110, 10);
+                else{
+                    sb.draw(point.getPoint(), point.getPosition().x, point.getPosition().y);
+                }
+
             }
         }
         else
@@ -194,6 +193,6 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-        background.dispose();;
+        background.dispose();
     }
 }

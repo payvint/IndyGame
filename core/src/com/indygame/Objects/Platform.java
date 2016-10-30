@@ -15,7 +15,7 @@ public class Platform {
     private Texture platform;
     private float angleInt;
     private float angle;
-    public Vector2 savePos;
+    private Vector2 savePos;
     public Vector2 centralPosition, centralPosition2;
     private int number;
 
@@ -47,7 +47,7 @@ public class Platform {
 
     public Vector2 getPosition2() { return position2; }
 
-    public void setCentralPosition() {
+    private void setCentralPosition() {
         double beta;
         if (angle > 0 && angle <= 90) {
             beta = ((this.angle - Math.atan(4)) + MathUtils.PI * 4) % (MathUtils.PI * 2);

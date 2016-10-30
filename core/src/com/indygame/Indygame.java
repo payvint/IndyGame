@@ -26,6 +26,7 @@ public class Indygame extends ApplicationAdapter {
 
 	private GameStateManager gsm;
 	private SpriteBatch batch;
+	public static boolean isGameOn;
 
 
 	//Lay
@@ -37,6 +38,7 @@ public class Indygame extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		isGameOn = false;
 		prefs = Gdx.app.getPreferences("MySettings");
 		if (!prefs.contains("highscore")) {
 			prefs.putInteger("highscore", 0);
@@ -46,7 +48,6 @@ public class Indygame extends ApplicationAdapter {
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(0,0,1,1);
 		gsm.push(new PlayState(gsm));
-		//gsm.push(new MenuState(gsm));
 	}
 
 	@Override

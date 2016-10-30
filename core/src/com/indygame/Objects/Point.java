@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.indygame.Indygame;
 
 /**
  * Created by artem on 07.07.16.
@@ -17,9 +18,8 @@ public class Point {
     private Texture point;
     public int quantityBouncing = 0;
     private int coefficient = 0;
-    public boolean isGameOn;
     private boolean added = false;
-    public Vector2 centralPosition;
+    private Vector2 centralPosition;
     public int lastCollide;
     private int sigma = 20;
     private static final int beginVelocity = 150;
@@ -54,7 +54,7 @@ public class Point {
     }
 
     public void update(float dt) {
-        if (isGameOn) {
+        if (Indygame.isGameOn) {
             velocity.add((beginVelocity + coefficient) * MathUtils.cos(angle), (beginVelocity + coefficient) * MathUtils.sin(angle));
             if (quantityBouncing % 5 == 0 && quantityBouncing > 0 && !added) {
                 coefficient += increment(quantityBouncing);
@@ -70,7 +70,7 @@ public class Point {
 
     }
 
-    public void setCentralPosition() {
+    private void setCentralPosition() {
         double beta = Math.atan(this.point.getHeight() / this.point.getWidth());
 
         double diagonal = Math.sqrt(this.point.getWidth() * this.point.getWidth() + this.point.getHeight() * this.point.getHeight());
