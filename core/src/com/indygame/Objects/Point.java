@@ -29,7 +29,7 @@ public class Point {
         velocity = new Vector2(0, 0);
         this.angle = (float) ((float) (angle / 180.0) * Math.PI);
         angleInt = angle;
-        point = new Texture("point.png");
+        point = new Texture("point2.png");
         lastCollide = 0;
     }
 
@@ -104,7 +104,7 @@ public class Point {
         double horizontal2 = Math.sin(beta2) * dist2;
         double vertical = Math.cos(beta) * dist;
         double vertical2 = Math.cos(beta2) * dist2;
-        return (vertical <= 10 + point.getWidth() / 2 + (beginVelocity + coefficient) / 15 - 10 && horizontal <= 41) || (vertical2 <= 10 + point.getWidth() / 2 + (beginVelocity + coefficient) / 15 - 10 && horizontal2 <= 41);
+        return (vertical <= 10 + point.getWidth() / 2 + (beginVelocity + coefficient) / 15 - 10 && horizontal <= 30) || (vertical2 <= 10 + point.getWidth() / 2 + (beginVelocity + coefficient) / 15 - 10 && horizontal2 <= 30);
     }
 
     public void angleMirrorRotation(float angle) {

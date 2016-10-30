@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Oct 30 02:41:19 EEST 2016
+#Sun Oct 30 13:08:11 EET 2016
 5.base=/home/artem/Documents/IndyGame/android/build/intermediates/assets/debug
 42.base=/home/artem/Documents/IndyGame/android/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main
 32.set=ANDROID_RESOURCE
