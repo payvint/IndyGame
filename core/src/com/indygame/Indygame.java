@@ -31,8 +31,8 @@ public class Indygame extends ApplicationAdapter {
 	//Lay
 	//public static float PosMin = (height - width) / 2;
 	//public static float PosMax = (height - width) / 2 + width;
-	public static float PosMin = height - 100 - width;
-	public static float PosMax = height - 100;
+	public static float PosMin = height - 100 - width; // 220
+	public static float PosMax = height - 100; // 700
 	public static Preferences prefs;// = Gdx.app.getPreferences("MySettings");
 
 	@Override

@@ -22,6 +22,7 @@ public class Point {
     public Vector2 centralPosition;
     public int lastCollide;
     private int sigma = 20;
+    private static final int beginVelocity = 150;
 
     public Point(float x, float y, float angle) {
         position = new Vector2(x, y);
@@ -42,9 +43,9 @@ public class Point {
 
     private int increment(int quantityBouncing) {
         if (quantityBouncing <= 25)
-            return 20;
-        else if (quantityBouncing <= 50)
             return 15;
+        else if (quantityBouncing <= 50)
+            return 10;
         else
         {
             sigma /= 2;
@@ -54,7 +55,6 @@ public class Point {
 
     public void update(float dt) {
         if (isGameOn) {
-            int beginVelocity = 150;
             velocity.add((beginVelocity + coefficient) * MathUtils.cos(angle), (beginVelocity + coefficient) * MathUtils.sin(angle));
             if (quantityBouncing % 5 == 0 && quantityBouncing > 0 && !added) {
                 coefficient += increment(quantityBouncing);
@@ -78,13 +78,33 @@ public class Point {
     }
 
     public boolean collides(Platform platform) {
+        setCentralPosition();
         double x = platform.centralPosition.x - centralPosition.x;
-        double xConstant = 50;
+        double x2 = platform.centralPosition2.x - centralPosition.x;
         double y = platform.centralPosition.y - centralPosition.y;
-        double yConstant = 45;
-        double distance = Math.sqrt(x * x + y * y);
-        double maxDistance = Math.sqrt(xConstant * xConstant + yConstant * yConstant);
-        return maxDistance >= distance;
+        double y2 = platform.centralPosition2.y - centralPosition.y;
+        double dist = Math.sqrt(x * x + y * y);
+        double dist2 = Math.sqrt(x2 * x2 + y2 * y2);
+        float beta = (float) Math.abs(Math.acos(Math.abs(x) / dist));
+        float beta2 = (float) Math.abs(Math.acos(Math.abs(x2) / dist2));
+        int angle = (int) platform.getAngle() % 180;
+
+        if (angle > 90) {
+            angle = 180 - angle;
+            beta += (float) ((float) ((180 - angle) / 180.0) * Math.PI);
+            beta2 += (float) ((float) ((180 - angle) / 180.0) * Math.PI);
+            beta = Math.abs(beta);
+            beta2 = Math.abs(beta2);
+        }
+        else {
+            beta = Math.abs(beta - (float) ((float) (angle / 180.0) * Math.PI));
+            beta2 = Math.abs(beta2 - (float) ((float) (angle / 180.0) * Math.PI));
+        }
+        double horizontal = Math.sin(beta) * dist;
+        double horizontal2 = Math.sin(beta2) * dist2;
+        double vertical = Math.cos(beta) * dist;
+        double vertical2 = Math.cos(beta2) * dist2;
+        return (vertical <= 10 + point.getWidth() / 2 + (beginVelocity + coefficient) / 15 - 10 && horizontal <= 41) || (vertical2 <= 10 + point.getWidth() / 2 + (beginVelocity + coefficient) / 15 - 10 && horizontal2 <= 41);
     }
 
     public void angleMirrorRotation(float angle) {

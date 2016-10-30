@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/artem/Documents/IndyGame/android/build/intermediates/res/merged/debug/drawable-xhdpi/ic_launcher.png",
+        "source": "/home/artem/Documents/IndyGame/android/res/drawable-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/artem/Documents/IndyGame/android/build/intermediates/res/merged/debug/drawable-xhdpi/ic_launcher1.png",
+        "source": "/home/artem/Documents/IndyGame/android/res/drawable-xhdpi/ic_launcher1.png"
+    }
+]

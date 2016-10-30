@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/pinkpony008/IndyGame/android/build/intermediates/res/merged/debug/values/values.xml",
+        "outputFile": "/home/artem/Documents/IndyGame/android/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 96
                 },
                 "from": {
-                    "file": "/home/pinkpony008/IndyGame/android/res/values/strings.xml",
+                    "file": "/home/artem/Documents/IndyGame/android/res/values/strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -31,7 +31,7 @@
                     "endOffset": 559
                 },
                 "from": {
-                    "file": "/home/pinkpony008/IndyGame/android/res/values/styles.xml",
+                    "file": "/home/artem/Documents/IndyGame/android/res/values/styles.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
