@@ -1,4 +1,4 @@
-#Sun Oct 30 13:08:11 EET 2016
+#Sun Oct 30 17:46:28 EET 2016
 base.0=/home/artem/Documents/IndyGame/android/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6a060ef48ef85f557caa992dc2a3a1ff7fd54a61
 renamed.1=classes.dex
 renamed.0=classes2.dex

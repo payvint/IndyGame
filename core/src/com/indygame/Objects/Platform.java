@@ -59,12 +59,18 @@ public class Platform {
         centralPosition2 = new Vector2(position2.x + (float) (Math.cos(beta) * (diagonal / 2.0)), position2.y + (float) (Math.sin(beta) * (diagonal / 2.0)));
     }
 
+    private void scrollAbroad()
+    {
+
+    }
+
     private void Scroll(Vector3 touchPos, boolean getTouch)
     {
-        if (angle % 180 == 0)
+        if (!getTouch)
+            savePos.set((float) Math.sin(angle) * (position.x - touchPos.x) , (float) Math.cos(angle) * (position.y - touchPos.y));
+        //position.set((float) Math.sin(angle) * (touchPos.x + savePos.x) + (float) Math.cos(angle) * position.x, (float) Math.cos(angle) * (touchPos.y + savePos.y) + (float) Math.sin(angle) * position.y);
+        if (angleInt % 180 == 0)
         {
-            if (!getTouch)
-                savePos.set(0, position.y - touchPos.y);
             position.y = touchPos.y + savePos.y;
             if (position.y > Indygame.PosMax - 80)
             {
@@ -86,8 +92,6 @@ public class Platform {
         }
         else
         {
-            if (!getTouch)
-                savePos.set(position.x - touchPos.x, 0);
             position.x = touchPos.x + savePos.x;
             if (position.x > Indygame.width - 80)
             {
